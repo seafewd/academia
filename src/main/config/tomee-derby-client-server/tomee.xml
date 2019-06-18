@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tomee>
+	<!-- see http://tomee.apache.org/containers-and-resources.html -->
+
+	<!-- activate next line to be able to deploy applications in apps -->
+	<!-- <Deployments dir="apps" /> -->
+
+	<!-- Based on: http://tomee.apache.org/examples-trunk/datasource-versioning/ -->
+	<Resource id="Derby-client-server" type="DataSource">
+		JdbcDriver org.apache.derby.jdbc.ClientDriver
+		JdbcUrl jdbc:derby://localhost:1527/test;create=true
+		UserName derby
+		Password derby
+  </Resource>
+</tomee>

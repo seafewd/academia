@@ -1,0 +1,17 @@
+    ----------
+    User Stories
+    ----------
+    ----------
+    Month Day, 2018
+
+User Stories
+
+	In software development and product management, a user story is an
+informal, natural language description of one or more features of a
+software system. User stories are often written from the perspective
+of an end user or user of a system ({{{https://en.wikipedia.org/wiki/User_story}Wikipedia}}).
+
+	For this project, we follow the principle of
+"Don't Repeat Yourself" (DRY) principle ({{{https://en.wikipedia.org/wiki/Don%27t_repeat_yourself}Wikipedia}}). Hence, the only place
+for user stories are items in the Product Backlog and eventually in
+the Sprint Backlog.

@@ -1,0 +1,34 @@
+    ----------
+    Product Backlog
+	----------
+    ----------
+    Month Day, 2018
+
+Product Backlog
+
+    The product backlog is a list of user stories which is used to implement the product vision.
+It is sorted according to the priority of the user stories according to the product owner.
+The priority of these stories will be modified during the process of the project.
+
+
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+
+|<<ID>>|<<Story Name>>|<<Story Description>>|<<Priority>>|<<Estimated Effort>>|<<Actual Effort (H)>>|<<Status>>|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+
+|01|List modules|As a student I want to list modules I'm entitled to subscribe such that I can perform a subscription.|High|3|tbd|Ongoing|
+*--+---------------+-----------------------+------------------------+------------------------+----------+----------+
+|02|View grades|As a student I want to be able to view my grades with the help of a simple overview of all past/current enrolled module runs|High|3|TBD|Waiting|
+*--+---------------+-----------------------+------------------------+------------------------+----------+----------+
+|03|View invoices|As a student I want to be able to view my due invoices as well as my already paid invoices|Medium|4|TBD|Waiting|
+*--+---------------+-----------------------+------------------------+------------------------+----------+----------+
+|04|View/edit personal information|As a student I want to be able to view and edit my personal information such as my address and contact information|Low|3|TBD|Ongoing|
+*--+---------------+-----------------------+------------------------+------------------------+----------+----------+
+|05|View/print/download enrollment confirmation|As a student I want to be able to view, print and download a document confirming my enrollment in the school|Medium|4|TBD|Waiting|
+*--+---------------+-----------------------+------------------------+------------------------+----------+----------+
+|06|Manage grades|As a teacher I want to be able to add or edit the grades of students enrolled in the modules I'm responsible for|High|5|TBD|Waiting|
+*--+---------------+-----------------------+------------------------+------------------------+----------+----------+
+|07|Manage modules & module runs|As administrative staff I want to be able to create, remove and edit the content of modules|High|6|TBD|Waiting
+*--+---------------+-----------------------+------------------------+------------------------+----------+----------+
+|08|Manage students and teachers|As administrative staff I want to be able to assign students and teachers to module runs|High|4|TBD|Waiting
+*--+---------------+-----------------------+------------------------+------------------------+----------+----------+
+|09|View schedule|As a teacher and as a student I want to be able to view a schedule detailing the time and place for the module runs I'm subscribed to/I'm teaching|Medium|4|TBD|Waiting
+*--+---------------+-----------------------+------------------------+------------------------+----------+----------+

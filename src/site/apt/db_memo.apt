@@ -1,0 +1,202 @@
+		-------------
+		Memo on DB Access
+		-------------
+		Eric Dubuis
+		-------------
+		December 12, 2016; updated November 18, 2017; updated September 2018
+
+
+Introduction
+
+	This document memorizes how to access a relational database. The following
+types of database access exist:
+
+	* In-memory database: Database code resides in the same Java VM; data is
+		not persisted on disk. Used for testing by developers and by CI
+		tests.
+
+	* Embedded database: Database code resides in the same Java VM; data is
+		(typically) saved on disk. Used for testing by developers and by CI
+		tests.
+
+	* Client-Server mode: Application acts as client and accesses the database
+		via a network connection. Database server must be started prior to
+		the application. Used for integration or system test; used for
+		production settings.
+
+	[]
+
+		[Note:]	In this project, only the in-memory and client-server variants
+				are described in detail.
+
+Configuration for Tests and Execution
+
+	In oder to execute tests that use the JPA persistence mechanism, a database
+must be accessible from within the Java VM process. If executed via Maven, the
+corresponding dependencies must be made available in the project POM. See
+<<<pom.xml>>> for some typical dependencies.
+
+	The JPA layer of the application itself must be configured such that it
+can use the underlying database in the way desired. File <<<persistence.xml>>>
+must be included in the corresponding application JAR or WAR file. See
+<<<src/main/resources/META-INF>>> for a series of sample configurations
+for typical database access types.
+
+		[Note:]	For the TomEE container, an additional configuration
+				setting is required, since TomEE uses the HSQL database
+				by default.
+
+
+Derby Server
+
+	To use Derby, download it from here: http://db.apache.org/derby/derby_downloads.html.
+
+	Install it according to the instruction given here: http://db.apache.org/derby/docs/10.12/getstart/index.html
+
+	I assume that you have the directory containing the Derby commands in your <<<$PATH>>>
+environment variable. Then:
+
+* Starting the Server
+
+	Open a terminal window and start the Server:
+
++----+
+$ startNetworkServer
+Tue Dec 12 16:57:45 CET 2016 : Apache Derby Network Server - 10.8.1.2 - (1095077) started and ready to accept connections on port 1527
++----+
+
+	To stop the server, type <<<CTRL-C>>>.
+
+	You may encounter a security issue as illustrated here:
+
++----+
+$ startNetworkServer
+Tue Dec 12 16:59:37 CET 2016 : Security manager installed using the Basic server security policy.
+Tue Dec 12 16:59:38 CET 2016 : access denied ("java.net.SocketPermission" "localhost:1527" "listen,resolve")
+java.security.AccessControlException: access denied ("java.net.SocketPermission" "localhost:1527" "listen,resolve")
+	at java.security.AccessControlContext.checkPermission(AccessControlContext.java:472)
+	at java.security.AccessController.checkPermission(AccessController.java:884)
+	...
++----+
+
+	The simplest way to circumvent this is to start the server without a Java
+security manager. (Note however that this is acceptable when working in the
+development mode only.)
+
++----+
+$ startNetworkServer -noSecurityManager
+Tue Dec 12 17:03:45 CET 2016 : Apache Derby Network Server - 10.8.1.2 - (1095077) started and ready to accept connections on port 1527
++----+
+
+
+* Accessing the Database from the Command Line
+
+	Provided that the server is running then you can access the database in various
+ways, for example, via the interactive command line utility <<<ij>>>:
+
++----+
+$ ij
+ij version 10.8
+ij>
++----+
+
+	Connect the utility to the server:
+
++----+
+ij> connect 'jdbc:derby://localhost:1527/test';
++----+
+
+	You can list the tables of the database <<<test>>>:
+
++----+
+ij> show tables;
+TABLE_SCHEME        |TABLE_NAME                    |REMARKS             
+------------------------------------------------------------------------
+SYS                 |SYSALIASES                    |                    
+SYS                 |SYSCHECKS                     |                    
+SYS                 |SYSCOLPERMS                   |                    
+...                 ...                            ...
+SYSIBM              |SYSDUMMY1                     |                    
+DERBY               |STUDENT                       |                    
+DERBY               |...                           |                    
+DERBY               |...                           |                    
+DERBY               |SEQUENCE                      |                    
+ij>
++----+
+
+	To select the content of a table, type:
+
++----+
+ij> select * from DERBY.PERSON;
+ID        |LASTNAME   |FIRSTNAME    | STATUS                                                                                                                            
+------------------------------------------------------------------
+1         |Smith      |Johnny       | 2         
+2         |...        |...          | ...        
+...
++----+
+
+	Consult the Derby manual for various other features.
+
+
+Profiles in the POM
+
+	There is one additional profile in file <<<pom.xml>>> which allows to run the
+application using a networked Derby database. Upon a build process, the corresponding
+file <<<persistence.xml>>> is copied to the appropriate place enabling the
+specific database as well as the corresponding access style. The necessary
+driver software is specified in the profiles, too, as a dependency.
+
+	The following table lists the profile name, database name, access style, and
+place of the corresponding <<<persistence.xml>>> file as well as TomEE's configuration
+file <<<tomee.xml>>>. File <<<persistence.xml>>> is packaged into the produced
+WAR/JAR file whereas file <<<tomee.xml>>> is copied into TomEE's configuration
+directory <<<./target/apache-tomee/conf>>>:
+
+*-----------------------*---------------*-------------------*---------------------------------------------*
+| Profile ID			| Database		| Access style		| Configuration									|
+*-----------------------*---------------*-------------------*---------------------------------------------*
+| (default)				| H2			| in-memory			| src/main/resources/META-INF					|
+*-----------------------*---------------*-------------------*---------------------------------------------*
+| derby-client-server	| Derby			| client/server		| src/main/config/derby-client-server\		|
+| 						| 				| 					| src/main/config/tomeederby-client-server	|
+*-----------------------*---------------*-------------------*---------------------------------------------*
+
+
+Using the Profiles When Running TomEE via Maven
+
+	By default, the in-memory database is used when running Maven without specifying a profile:
+
++-----+
+
+mvn tomee:run
+
++-----+
+
+	To make any of the above profiles effective, run TomEE via the following Maven command:
+
++-----+
+
+mvn tomee:run -P<Profile ID>
+
++-----+
+
+
+
+Database Access and Logging
+
+	{{{http://www.eclipse.org/eclipselink/}EclipseLink}} is used as O/R mapper. The following
+EclipseLink properties manage the database access and logging level (snippet from the Derby
+client/server JPA configuration file):
+
++------+
+<property name="javax.persistence.jdbc.user" value="derby" />
+<property name="javax.persistence.jdbc.password" value="*****" />
+<property name="eclipselink.logging.level" value="FINE" />
+<property name="eclipselink.ddl-generation" value="drop-and-create-tables" />
+<property name="eclipselink.ddl-generation.output-mode" value="database" />
++------+
+
+	Logging level <<<FINE>>> is specified by default. Use level <<<SEVERE>>> to log
+severe problems only. See
+{{{http://www.eclipse.org/eclipselink/documentation/2.5/jpa/extensions/p_logging_level.htm}EclipseLink, Table 5-55}}
+for various other useful logging levels.

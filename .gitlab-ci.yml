@@ -1,0 +1,55 @@
+# This YAML file initiates the CI on http://gitlab.ti.bfh.ch and, on success, publishes the
+# site documentation on http://due1.pages.ti.bfh.ch/${project-name}/
+#
+# To learn the syntax of YAML, see: https://docs.gitlab.com/ee/ci/yaml/
+---
+
+variables:
+  MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true"
+  MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN -Dorg.slf4j.simpleLogger.showDateTime=true -Djava.awt.headless=true"
+
+
+.brachrefs:
+  only:
+    refs:
+      - master
+      - /^sprint[1-4]$/
+      - /^Sprint[1-4]$/
+      - /^sprint_[1-4]$/
+      - /^Sprint_[1-4]$/
+      - /^d[1-4]$/
+      - /^D[1-4]$/
+      - /^d_[1-4]$/
+      - /^D_[1-4]$/
+      - /^del[1-4]$/
+      - /^Del[1-4]$/
+      - /^del_[1-4]$/
+      - /^Del_[1-4]$/
+
+stages:
+  - build
+  - deploy
+
+build:
+  extends: .brachrefs
+  artifacts:
+    paths:
+      - target/staging
+  image: maven:3.3.9-jdk-8
+  script:
+    - "mvn $MAVEN_CLI_OPTS clean package site site:stage"
+  stage: build
+  allow_failure: true
+
+pages:deploy:
+  dependencies:
+    - build
+  extends: .brachrefs
+  artifacts:
+    paths:
+      - public
+  image: "busybox:latest"
+  script:
+    - "mv target/staging public"
+  stage: deploy
+  allow_failure: true

@@ -1,0 +1,132 @@
+    ----------
+    Sprint Backlog
+	----------
+    ----------
+    Month Day, 2018
+
+Sprint Backlog
+
+    The sprint backlog is a breakdown of the user stories in the product backlog into tasks.
+In addition, a task can also be of technical nature such as to exploring technical difficulties
+or alternatives. All tasks are estimated in working hours and need to be continuously updated
+by team members. If not in the state of <Waiting>, each task has an owner. 
+
+
+* Sprint Backlog of Sprint 1
+
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|<<ID>>|<<Story Name>>|<<Story Description>>|<<Priority>>|<<Estimated Effort>>|<<Actual Effort>>|<<Status>>|<<Owner>>|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|01|Domain Model|Create|High|1,5|2|Done|Martin/Alessandro|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|02|Domain Model|Create|High|2,5|3|Done|Alessandro|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|03|Use Case Diagram|Create|Medium|1|1|Done|Martin/Fredi|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|04|Add a set of stakeholders|-|Medium|1|1|Done|Alex|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|05|Write JUnit tests for all classes|-|Medium|4|TBD|Done|Alessandro/Martin|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|06|Fill product backlog|Keep the tasks up to date|High|1|1|Done|Fredi|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|07|Generate Javadoc|-|Low|1|1|Moved to Sprint 2|Fredi|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|08|Glossary|Always update the Glossary if new keywords are introduced|Low|1|1|Ongoing|All|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|09|Persistence JUnit Test|Test persistence|Medium|2|TBD|Moved to Sprint 2|Alex|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|10|Models Services|Write services for the models|Medium|2|2|Done|Alessandro|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+
+* Sprint Backlog of Sprint 2
+
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|<<ID>>|<<Story Name>>|<<Story Description>>|<<Priority>>|<<Estimated Effort>>|<<Actual Effort>>|<<Status>>|<<Owner>>|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|01|Data Filler| Prepare a custom Filler to generate data when application starts|High|7|8| Done |Alessandro |
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|02|Create Users view| Create the users view updated according the new model |High|3|4|Done| Alessandro |
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|03|Create Enrollments view| Create the enrollments view | High |5|5|Done|Alex|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|04|Create ModuleRuns view | Create the moduleRuns view | High |5|4|Done|Alex|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|05|Create Modules view | Create the modules view | High |5|5|Done|Martin|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|06|Create Professors view| Create the professors view | High |5|4|Done|Martin|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|07|Users CRUD Functions| Adapt creation, update and delete of users according to the new model |High|3|4|Done|Alessandro|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|08|Enrollments CRUD Functions| Create creation, update and delete functions for Enrollments |High|5|6|Moved to Sprint 3 because of binding bug|Alex|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|09|ModuleRuns CRUD Functions| Create creation, update and delete functions for ModuleRuns |High|5|6|Moved to Sprint 3 because of binding bug|Alex|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|10|Modules CRUD Functions| Create creation, update and delete functions for Modules |High|5|6|Moved to Sprint 3 because of binding bug|Martin|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|11|Professors CRUD Functions| Create creation, update and delete functions for Professors |High|5|5|Moved to Sprint 3 because of binding bug|Martin|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|12|Java Doc and Class Headers| Improve Java Doc comments and Class Headers |Medium|2|5|Done|Fredi|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|13|Bug Fixes|Correct bugs in the project|Medium|5|10|Done|Alessandro|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|14|Fix PMD error|Fix the PMD error|Medium|5|4|Done|Martin|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|15|Improve test coverage|Improve Test coverage|Medium|2|5|Done|Fredi|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+
+
+* Sprint Backlog of Sprint 3
+
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|<<ID>>|<<Story Name>>|<<Story Description>>|<<Priority>>|<<Estimated Effort>>|<<Actual Effort>>|<<Status>>|<<Owner>>|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|01|Enrollments CRUD Functions| Create creation, update and delete functions for Enrollments |High|5|6|Bug still present (low prio)|Alex|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|02|ModuleRuns CRUD Functions| Create creation, update and delete functions for ModuleRuns |High|5|6|Bug still present (low prio)|Alex|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|03|Modules CRUD Functions| Create creation, update and delete functions for Modules |High|5|6|Bug still present (low prio)|Martin|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|04|Professors CRUD Functions| Create creation, update and delete functions for Professors |High|5|5|Done|Alex + Alessandro|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|05|Authentication/Authorization System|Login function based on system roles|High|15|15|Ongoing, rest will be made in Sprint4|Alessandro|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|06|Auto-generate user tags and passwords for Users|Auto generation|High|4|4|Done|Alex|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|07|Create SSD for user story "Enroll to module"| |Medium|4|3|Done|Alex|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|08|Create A-I Graph| |Medium|4|5|Done|Martin|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|09|Add ability for Student to change e-mail address| |Low|2|2|Only added e-mail, moved to Sprint 4 (very low prio) - Done|Alex|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|10|Testing|Add tests according to new classes and methods, improve old ones|High|20|35|Done|Fredi|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|11|JavaDoc|Improve, fix Warnings|Low|2|4|Done|Fredi|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|12|Remove setId methods in Model classes| |Low|1|1|Done|Fredi|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|13|Fix/Implement getAll(value) methods in ServiceClasses|Also adjust Tests to it|Medium|3|-|Moved to Sprint 4|Anyone|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|14|Correct Domain Model errors| |High|1|1|Done|Martin|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+
+* Sprint Backlog of Sprint 4
+
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|<<ID>>|<<Story Name>>|<<Story Description>>|<<Priority>>|<<Estimated Effort>>|<<Actual Effort>>|<<Status>>|<<Owner>>|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|01|Add time and day attribute for ModuleRuns|Adjust dependent classes|Medium|2|TBD|Waiting||
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|02|Schedule view for profs and students|Implement it according to the product backlog|Medium|8|TBD|Waiting| |
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|03|Implement a download function|for schedules and the different views, optional: printing|Medium|4|TBD|Waiting| |
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|04|Create StudAdmin Role|Implement functionality according to the product backlog|High|20|TBD|Waiting| |
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|05|Finish tests|according to the final version|Medium|10|TBD|Waiting|Fredi|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|06|Create view adapted for Student| |High|7|TBD|Waiting|Anyone|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|07|Create view adapted for Professor/Admin| |High|7|TBD|Waiting|Anyone|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|08|Working login system|Continuation from Sprint 3|High|15|TBD|Waiting|Anyone|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+

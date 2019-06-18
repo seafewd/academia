@@ -1,0 +1,19 @@
+    ----------
+    Domain Model
+    ----------
+    ----------
+    Month Day, 2018
+
+Domain Model
+
+	This document describes the domain model ("Fachmodell") of the Student Administration
+System 'Academia'. It i©ntroduces the most important entities ("Fachklassen") and the
+associations among them. It also introduces the respective multiplicities.
+
+	Note that only a few attributes are shown in the diagram, but no operations.
+
+
+* Domain Model
+
+~~Remove comment escape sequence "~~" in the line below to insert image here:
+[images/domain_model3.svg] Domain Model

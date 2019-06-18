@@ -1,0 +1,8 @@
+/target/
+/.settings/
+/.idea/
+/.classpath
+/.project
+/academia-ng-white.iml
+/academia-ng-due1.iml
+/.DS_Store

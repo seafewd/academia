@@ -1,0 +1,16 @@
+    ----------
+    Context View
+    ----------
+    ----------
+    Month Day, 2018
+
+Context View
+
+  This document describes the context view of the Student Administration
+System 'Academia'. It introduces the system and its environment.
+
+
+* Use Case Diagram
+
+~~Remove comment escape sequence "~~" in the line below to insert image here:
+[images/use_case_diagram_2.svg] Use Case Diagram

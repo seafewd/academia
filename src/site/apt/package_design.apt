@@ -1,0 +1,28 @@
+    ----------
+    Package Design
+    ----------
+    ----------
+    Month Day, 2018
+
+Package Design
+
+* Package Diagram
+
+	The package diagram shows the dependencies between the packages in a project.
+Here, it consists of the following elements: package, class, and interface.
+
+~~Remove comment "~~" to include figure here:
+~~[images/package_diagram.svg] Package Diagram
+
+~~Our package diagram consists of .., because we built it using the Model View Presenter pattern (MVP). ...
+
+ 
+
+* A-I Graph
+
+	The A-I graph shows the relationship between the stability and abstractness of each package.
+
+~~Remove comment "~~" to include figure here:
+[images/AIGraph.png] A-I Graph
+
+	~~The most abstract package in our project is models

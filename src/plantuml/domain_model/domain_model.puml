@@ -1,0 +1,26 @@
+@startuml
+
+title Domain Model
+
+ModuleRun "1" -- "0..*" Enrollment : Has
+Module "1" -- "0..*" ModuleRun : Consists of
+Professor "1..*" -- "0..*" ModuleRun : Teaches
+Professor "1" -- "0..*" Module : Manages
+Student "1" -- "0..*" Enrollment: Are made by
+StudentStatus "1" -- "0..*" Student : Has
+Enrollment "1" -- "1" Evaluation : Results in
+DegreeProgramme "1" -- "0..*" Module : Consists of
+Semester "1" -- "0..*" ModuleRun : Are taught in
+ModuleType "1" -- "1" Module : Is of type
+
+hide circle
+hide members
+skinparam padding 2
+skinparam shadowing false
+skinparam class {
+    BackgroundColor Whitesmoke
+    BorderColor Gray
+    ArrowColor Gray
+}
+
+@enduml

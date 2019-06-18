@@ -1,0 +1,33 @@
+The Maven Site of the Student Administration System  'Academia'
+
+	This is the Student Administration System 'Academia' project. To generate
+this site, open a command window, go to the root directory of the project, and then type:
+
++-----+
+
+mvn clean package site
+
++-----+
+
+
+	You'll find the generated project documentation in <<<./target/site/index.html>>>.
+
+	To run you code and test it with a browser, type:
+
++-----+
+
+mvn tomee:run
+
++-----+
+
+	Then open your browser at <<<http://localhost:8080/>>>.
+
+	To use one of the profiles defined in the POM, run TomEE via the following Maven command:
+
++-----+
+
+mvn tomee:run -P<Profile ID>
+
++-----+
+
+	To learn more on the different profiles for the database configurations, see See {{{./db_memo.html}Memo on DB Access}}.

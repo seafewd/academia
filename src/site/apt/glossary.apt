@@ -1,0 +1,55 @@
+    ----------
+    Glossary
+	----------
+    ----------
+    Month Day, 2018
+
+Glossary for the Student Administration System 'Academia'
+
+	This is the Glossary for the project Student Administration System. Here, the
+most important terms are captured and briefly described. It is maintained
+by the development team.
+	
+	
+	[Product owner]		The product owner has all rights about the project.
+
+	[Academia]			The student administration system 'Academia' - A software system enabling
+					    students to manage their module subscription and teachers to teach
+					    their classes.
+	
+	[SAS]				The abbreviation for a student administration system.
+
+	[Stakeholders]		The people that are related to, or have an interest, in the product.
+
+	[Scrum-Master]      The "coach" of the development team.
+
+	[Use Case Diagram]  Representation of interactions between the user and the system.
+
+	[User Stories]      Description of interactions between the end user and the system.
+
+	[Domain Model]      Shows the (most) important concepts of a software system.
+
+    [Backlog]           Shows all task that should be implemented.
+
+                        * Product Backlog: General functionality that has to be implemented in the final product
+
+                        * Sprint Backlog: More specific tasks that should be done in one Sprint
+
+    [J-Unit]            Testing framework for single Java-Classes or Methods.
+
+
+
+* Stakeholders
+
+*------+--------+---------------+------------+
+|<<No>>|<<Name>>|<<Description>>|<<Interest>>|
+*------+--------+---------------+------------+
+|01|Student|Students enrolled in the school|Register for module runs, download or view their schedule, view their grades, download/print proof of enrollment|
+*------+--------+---------------+------------+
+|02|Teachers|Teachers working at the school|Edit/assign grades, view schedule for classes they are responsible for, view internal administrative information|
+*------+--------+---------------+------------+
+|03|Administrative staff|Administrative employees that don't work as teachers|Assign rooms to classes, plan lectures, verify entries and grades, adjust special cases in case of errors|
+*------+--------+---------------+------------+
+
+	
+

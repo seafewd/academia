@@ -1,0 +1,213 @@
+		-------------
+		Deliverable 4
+		-------------
+		Eric Dubuis
+		-------------
+		September 29, 2017; updated October 12, 2017; updated December 2, 2017; updated September 2018
+
+
+Deliverable 4
+
+* Introduction
+
+	This document describes the tasks to be performed for, and the constituents
+of, the Deliverable 4. Such a document would usually not exist in a real
+project documentation. (Similar information would be found elsewhere, for
+example, in the Iteration Plan document, however.)
+
+		[Note:]	Do not edit or modify this document. This document is
+				managed by your lecturer.
+
+
+* Goals
+
+	The goals for this sprint are similar as the ones for sprint 3:
+
+	*	To organize a sprint in terms of product backlog, sprint backlog/tasks:
+
+			*	Product backlog organization
+
+			*	Tasks and task allocations
+
+			*	Team collaboration
+
+			*	Working with Git (branches, team efforts, merging, ...)
+
+	*	To commit to tasks and to complete them.
+
+	*	To deliver a well-structured software in terms of good layering and package design.
+
+	*	To deliver working object persistence.
+
+	*	To deliver working user interface based on Vaadin.
+
+	*	To deliver tested code for everything beyond the UI layer.
+
+	*	To document your solution.
+
+	[]
+
+	The main difference to the preceding sprints is that you try to estimate your chosen product
+backlog items and sprint tasks. Use a relative unit, and then try to calibrate it (e.g., assign
+hours) as soon as you'll have finished the first task.
+
+
+* Your Tasks
+
+	With respect to Git, you work as described in {{{./s1.html}Sprint 1}}.
+	These are the effective task you'll have to provide for this sprint:
+
+	*	Organize your product backlog (PL, as in previous sprints):
+
+			* PL item prioritization
+
+			* PL item grooming
+
+			* PL item "calibrated" estimation
+
+	*	Organize your sprint:
+	
+			* Fix the list of PB items for this sprint
+
+			* Split larger PB items into tasks
+
+			* Provide task estimations in hours
+
+	*	Update any documents you have so far, if needed
+
+	*	Structure your code in packages by respecting the SOLID design principles
+
+	*	Analyze your resulting package structure; provide A-I graph
+
+	*	Provide object persistence with JPA
+
+	*	Provide code for selected additional user stories
+
+			* Production Java interfaces and classes
+
+			* Vaadin 8 UI support
+
+			* JUnit test classes for the application logic and persistence
+
+	[]
+
+
+* Components of this Deliverable
+
+	The deliverable for this sprint shall encompass:
+
+	*	The product backlog at the beginning of the sprint
+
+	*	The sprint backlog items / task list
+	
+	*	The list of finished sprint backlog items / tasks and measurements of your efforts (in hours)
+
+	*	Production Java interfaces and classes
+
+			* JavaDoc documentation for public methods of entities and controllers
+
+	*	Production Vaadin UI code
+
+	*	Production Vaadin UI code linked to the application logic and persistence
+
+	*	Run <<<mvn clean package site>>> and check the following reports (and act accordingly):
+
+			* The test coverage (JaCoCo) report (95% code coverage beyond UI packages/classes)
+
+			* The JDepend report (no cycles allowed; respect the Stable Dependency Principle
+			  and the Stable Abstractions Principle). Adjust JDepend properties file <<<./jedpend.properties>>>
+			  in the root of your project tree accordingly
+
+			* The Checkstyle report (no errors allowed)
+
+	*	Run <<<mvn [clean package] tomee:run>>> and play with your application by directing
+		your browser to <<<http://localhost:8080/academia>>> or <<<http://localhost:8080/academia-\<project-color\>>>>
+
+	[]
+
+
+* Evaluation
+
+	100 points at most per team member are attributed to this deliverable. Points may
+	not be equally distributed among team members. (However, this is the goal.)
+
+*-----------------------------------------------------------------+---------------*-----------------*
+| Item															| Max. points	| Points received |
+*-----------------------------------------------------------------+---------------*-----------------*
+| Product backlog items at the beginning\						| 		5 		| 		 		  |
+| COMMENTS:\														| 				| 				  |
+| -																| 				| 				  |
+*----------------------------------------------------------------+---------------*-----------------*
+| The sprint backlog items / task list with task estimates\	 	| 	 	10		| 		 		  |
+| COMMENTS:\														| 				| 				  |
+| - 																| 				| 				  |
+*-----------------------------------------------------------------+---------------*-----------------*
+| The list of finished sprint backlog items / tasks and			| 		5		|   				  |
+| measurements of your efforts (in hours)\ 						| 				|   			  	  |
+| COMMENTS:\														| 				| 				  |
+| - \ 															| 				| 				  |
+| - 																| 				| 				  |
+*-----------------------------------------------------------------+---------------*-----------------*
+| Stable structure in terms of Java packages respecting the		| 		10 		| 		 		  |
+| SOLID design principles\ 										| 		 		| 		 		  |
+| COMMENTS:\														| 				| 				  |
+| - 																| 				| 				  |
+*-----------------------------------------------------------------+---------------*-----------------*
+| Production Java interfaces and classes for logical				| 		10		| 		 		  |
+| and persistence layer\											| 		 		| 		 		  |
+| COMMENTS:\														| 				| 			  	  |
+| - 								 								| 				| 				  |
+*-----------------------------------------------------------------+---------------*-----------------*
+| Production Java interfaces and classes for the user				| 		5 		| 		 		  |
+| interface layer\												| 		 		| 		 		  |
+| COMMENTS:\														| 				| 			  	  |
+| - 																| 				| 				  |
+*----------------------------------------------------------------+---------------*-----------------*
+| JUnit test classes for the core layers of the software,			| 		10 		| 		 		  |
+| coverage: 90% (UI components excluded)\						| 		 		| 		 		  |
+| COMMENTS:\														| 				| 			  	  |
+| - 																| 				| 				  |
+*-----------------------------------------------------------------+---------------*-----------------*
+| The JDepend report\											| 		5		| 		 		  |
+| COMMENTS:\														| 				| 			  	  |
+| - 																| 				| 				  |
+*-----------------------------------------------------------------+---------------*-----------------*
+| The Checkstyle report \										| 		5		| 		 		  |
+| COMMENTS:\														| 				| 			  	  |
+| - 																| 				| 				  |
+*-----------------------------------------------------------------+---------------*-----------------*
+| Javadoc quality \												| 		5		| 		 		  |
+| COMMENTS:\														| 				| 			  	  |
+| - 																| 				| 				  |
+*-----------------------------------------------------------------+---------------*-----------------*
+| Running application, UI, functionality\						| 		20		| 		 		  |
+| COMMENTS:\														| 				| 			  	  |
+| - 																| 				| 				  |
+*-----------------------------------------------------------------+---------------*-----------------*
+| Software (architecture) documentation\							| 		10		| 		 		  |
+| COMMENTS:\														| 				| 			  	  |
+| - 																| 				| 				  |
+*-----------------------------------------------------------------+---------------*-----------------*
+| Miscellaneous 1\												| 				| 		 		  |
+| COMMENTS:\														| 				| 			  	  |
+| - None															| 				| 				  |
+*-----------------------------------------------------------------+---------------*-----------------*
+| Miscellaneous 2\												| 				| 		 		  |
+| COMMENTS:\														| 				| 			  	  |
+| - None															| 				| 				  |
+*-----------------------------------------------------------------+---------------*-----------------*
+| Miscellaneous 3\												| 				| 		 		  |
+| COMMENTS:\														| 				| 			  	  |
+| - None															| 				| 				  |
+*-----------------------------------------------------------------+---------------*-----------------*
+| Total															| 		100		| 				  |
+*-----------------------------------------------------------------+---------------*-----------------*
+Distribution of points for this deliverable.
+
+
+* Deadline
+
+	This deliverable is due: See {{{./sprints.html}Sprint Plan}}.
+
+	[Note:]	Deadline is Friday evening. However, you can provide
+			your deliverable till the following Sunday evening, 12 pm.

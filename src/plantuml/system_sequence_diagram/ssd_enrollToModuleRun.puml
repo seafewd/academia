@@ -1,0 +1,21 @@
+@startuml
+
+Title Enroll to a module (run)
+Actor Student
+Database Controller
+Database Repository
+
+Student -> Controller: Enroll to a new module (run)
+
+Student -> Controller: Student::getEnrollments()
+Controller -> Repository: Student::getEnrollments()
+Repository --> Controller: Set of Enrollments for this Student object
+Controller --> Student: Set of Enrollments for this Student object
+Student --> Controller: Create new Enrollment
+Controller --> Student: Empty Enrollment object
+Student --> Controller: Enter enrollment data (ModuleRun ID, this.studentID{implicit}, Semester)
+Controller --> Repository: save(enrollment)
+Repository --> Controller:
+Controller --> Student: updateList()
+
+@enduml

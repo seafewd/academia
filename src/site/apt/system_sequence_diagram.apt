@@ -1,0 +1,27 @@
+    ----------
+    System Sequence Diagrams
+    ----------
+    ----------
+    Month Day, 2018
+
+
+System Sequence Diagrams
+
+	This document describes the (initial) set of the System Sequence Diagrams
+as introduced be {{{http://www.craiglarman.com/}Craig Larman}} the Student
+Administration System (SAS).
+
+
+* 1. User Story "..."
+
+	A student <<<s>>> ... The following system sequence diagram
+illustrates the sequence of <system operations>.
+
+Enroll to ModuleRun
+~~Remove "~~" to insert the SVG picture here:
+[images/ssd_enrollToModuleRun.svg] System sequence diagram for the "..." user story.
+
+
+* 2. Open Issues
+
+	SSD's for other user stories should be provided, too.

@@ -1,0 +1,8 @@
+^/\*$
+^ \* Copyright \(c\) 201[78] Eric Dubuis, Berner Fachhochschule, Switzerland\.$
+^ \*$
+^ \* Project 'academia-ng'$
+^ \*$
+^ \* Distributable under GPL license\. See terms of license at gnu\.org\.$
+^ \*/$
+^package 
