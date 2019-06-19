@@ -10,7 +10,6 @@ package ch.bfh.ti.soed.academia.backend.models;
 
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Set;
 
 
@@ -21,7 +20,9 @@ import java.util.Set;
                 query = "SELECT e FROM Enrollment AS e WHERE lower(e.student.firstName) LIKE CONCAT('%', lower(?1), '%')"
                          + "OR lower(e.student.lastName) LIKE CONCAT('%', lower(?1), '%')"),
         @NamedQuery(name = "Enrollment.findById",
-                query = "SELECT e FROM Enrollment AS e WHERE e.id LIKE ?1")
+                query = "SELECT e FROM Enrollment AS e WHERE e.id LIKE ?1"),
+        @NamedQuery(name = "Enrollment.findByUserTag",
+                query = "SELECT e FROM Enrollment AS e WHERE e.student.tag LIKE ?1")
 })
 
 
@@ -30,7 +31,7 @@ import java.util.Set;
  * The Enrollment entity.
  */
 @Entity
-public class Enrollment implements Serializable {
+public class Enrollment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -43,6 +44,7 @@ public class Enrollment implements Serializable {
     private Student student;
 
     private Evaluation evaluation;
+
 
     /**
      * Empty constructor required by JPA
@@ -79,6 +81,14 @@ public class Enrollment implements Serializable {
      */
     public ModuleRun getModuleRun() {
         return moduleRun;
+    }
+
+    /**
+     * Get name of module run
+     * @return Name of module run   String
+     */
+    public String getModuleRunName() {
+        return moduleRun.getName();
     }
 
     /**

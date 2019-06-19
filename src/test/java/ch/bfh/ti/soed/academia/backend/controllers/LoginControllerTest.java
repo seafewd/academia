@@ -9,14 +9,11 @@ package ch.bfh.ti.soed.academia.backend.controllers;
 
 import ch.bfh.ti.soed.academia.backend.models.Student;
 import ch.bfh.ti.soed.academia.backend.models.StudentStatus;
-import ch.bfh.ti.soed.academia.backend.utilities.PasswordGenerator;
-import ch.bfh.ti.soed.academia.backend.utilities.PasswordHash;
+import ch.bfh.ti.soed.academia.backend.utilities.password.PasswordGenerator;
 import org.junit.jupiter.api.*;
-
 import javax.ejb.embeddable.EJBContainer;
 import javax.inject.Inject;
 import javax.naming.NamingException;
-import javax.persistence.NoResultException;
 
 /**
  * TestingClass - Tests all Methods in class LoginController
@@ -70,17 +67,19 @@ public class LoginControllerTest {
      *  Tests: login method
      *  test the return null if the Username is not correct
      *  test the return null if the password is not correct
-     *
+     *  test the succesful login
      */
     @Test
     public void testLogin() {
         try {
             Student student = new Student("John", "Snow", StudentStatus.Enrolled);
             String psw = PasswordGenerator.generatePassword(5);
-            student = this.studentsController.save(student);
             student.setPassword(psw);
-            Assertions.assertEquals(null, this.loginController.login("Brata", "cic"));
-            Assertions.assertEquals(null, this.loginController.login(student.getTag(), "cic"));
+            student = this.studentsController.save(student);
+
+            Assertions.assertNull(this.loginController.login("Brata", "cic"));
+            Assertions.assertNull(this.loginController.login(student.getTag(), "cic"));
+            Assertions.assertNotNull(this.loginController.login(student.getTag(), psw));
         }catch (Exception ex){
             ex.printStackTrace();
         }

@@ -96,7 +96,7 @@ by team members. If not in the state of <Waiting>, each task has an owner.
 *------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
 |08|Create A-I Graph| |Medium|4|5|Done|Martin|
 *------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
-|09|Add ability for Student to change e-mail address| |Low|2|2|Only added e-mail, moved to Sprint 4 (very low prio) - Done|Alex|
+|09|Add ability for Student to change e-mail address| |Low|2|2|Done|Alex|
 *------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
 |10|Testing|Add tests according to new classes and methods, improve old ones|High|20|35|Done|Fredi|
 *------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
@@ -114,19 +114,25 @@ by team members. If not in the state of <Waiting>, each task has an owner.
 *------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
 |<<ID>>|<<Story Name>>|<<Story Description>>|<<Priority>>|<<Estimated Effort>>|<<Actual Effort>>|<<Status>>|<<Owner>>|
 *------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
-|01|Add time and day attribute for ModuleRuns|Adjust dependent classes|Medium|2|TBD|Waiting||
+|01|Create StudAdmin Role|Take the view that we used all the time before as a pattern. Implement functionality according to the product backlog point 12-14|High|12|15|Done|Alessandro|
 *------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
-|02|Schedule view for profs and students|Implement it according to the product backlog|Medium|8|TBD|Waiting| |
+|02|Student: Create view adapted for Student|See product backlog point 2, 3 & 10|High|7|6|Done|Martin|
 *------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
-|03|Implement a download function|for schedules and the different views, optional: printing|Medium|4|TBD|Waiting| |
+|03|Student: Implement as many features as time allows|See product backlog point 4 - 6 & 11|Medium|7|5|Done|Martin & Fredi|
 *------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
-|04|Create StudAdmin Role|Implement functionality according to the product backlog|High|20|TBD|Waiting| |
+|04|Prof: Create view adapted for Professor/Admin|See product backlog point 2 & 3 & 10|High|7|5|Done|Alex|
 *------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
-|05|Finish tests|according to the final version|Medium|10|TBD|Waiting|Fredi|
+|05|Student: Implement as many features as time allows|See product backlog point 8, 9 & 11|Medium|7|6|Done|Alex & Fredi|
 *------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
-|06|Create view adapted for Student| |High|7|TBD|Waiting|Anyone|
+|06|Working login system|Continuation from Sprint 3|High|15|10|Done|Alessandro|
 *------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
-|07|Create view adapted for Professor/Admin| |High|7|TBD|Waiting|Anyone|
+|07|Style: Web|Make the Site looking decent according to point 16 in product backlog|High|10|5|Done|Martin/Fredi|
 *------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
-|08|Working login system|Continuation from Sprint 3|High|15|TBD|Waiting|Anyone|
+|08|Style: Code and Formal Issues|Make the Code looking decent according to point 18 in product backlog, take care of other formal issues|High|10|10|Done|Fredi|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|09|Optional: Add time and day attribute for ModuleRuns|Adjust dependent classes|Optional|2|-|Not finished|Everyone|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|10|Optional: Schedule view for profs and students|Implement it according to the product backlog|Optional|8|-|Not finished|Everyone|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+
+|11|Tests|Finish tests according to the final version|High|10|15|Done|Everyone|
 *------+--------------+---------------------+------------+--------------------+-----------------+----------+---------+

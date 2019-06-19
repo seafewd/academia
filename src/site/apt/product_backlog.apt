@@ -10,25 +10,51 @@ Product Backlog
 It is sorted according to the priority of the user stories according to the product owner.
 The priority of these stories will be modified during the process of the project.
 
+    Reflection of the (almost) past project:
+In the beginning we had very much expectations what in our program has to be implemented. We underestimated the time for some points drastically,
+some things we thought would be simple took 30 or more hours for us to work on. Especially the backend part took us very long, the most time
+we spent there, the view for users was nowhere the most of the time. Other things that seemed like relatively time-expensive,
+for example a PDF implementation of the enrollment list, were done very quickly. Even if we miscalculated the time in the most points
+we learned in the process of the project to take more time to think things through carefully. We started to divide bigger tasks in very small ones
+to not lose the overview.
+
 
 *------+--------------+---------------------+------------+--------------------+-----------------+----------+
 |<<ID>>|<<Story Name>>|<<Story Description>>|<<Priority>>|<<Estimated Effort>>|<<Actual Effort (H)>>|<<Status>>|
 *------+--------------+---------------------+------------+--------------------+-----------------+----------+
-|01|List modules|As a student I want to list modules I'm entitled to subscribe such that I can perform a subscription.|High|3|tbd|Ongoing|
+|01|Roles|Implement the base structure for all necessary Roles for an Admin-System: Students, Teachers & Admins|High|5|5|Done|
+*------+--------------+---------------------+------------+--------------------+-----------------+----------+
+|02|Student: View|As a student I want to be able to view my personal information, my enrollment list and a list of all moduleRuns|High|30|20|Done|
 *--+---------------+-----------------------+------------------------+------------------------+----------+----------+
-|02|View grades|As a student I want to be able to view my grades with the help of a simple overview of all past/current enrolled module runs|High|3|TBD|Waiting|
+|03|Student: Subscription|As a student I want to be able to subscribe to ModuleRuns.|High|4|10|Done|
 *--+---------------+-----------------------+------------------------+------------------------+----------+----------+
-|03|View invoices|As a student I want to be able to view my due invoices as well as my already paid invoices|Medium|4|TBD|Waiting|
+|04|Student: View grades|As a student I want to be able to view my grades with the help of a simple overview of all past/current enrolled module runs|Optional|10|10|Done|
 *--+---------------+-----------------------+------------------------+------------------------+----------+----------+
-|04|View/edit personal information|As a student I want to be able to view and edit my personal information such as my address and contact information|Low|3|TBD|Ongoing|
+|05|Student: Print/download enrollment confirmation|As a student I want to be able to print and download a document confirming my enrollment list|Optional|10|5|Done|
 *--+---------------+-----------------------+------------------------+------------------------+----------+----------+
-|05|View/print/download enrollment confirmation|As a student I want to be able to view, print and download a document confirming my enrollment in the school|Medium|4|TBD|Waiting|
+|06|Student: View invoices|As a student I want to be able to view my due invoices as well as my already paid invoices (WILL NOT BE IMPLEMENTED)|Optional|4|-|Done|
 *--+---------------+-----------------------+------------------------+------------------------+----------+----------+
-|06|Manage grades|As a teacher I want to be able to add or edit the grades of students enrolled in the modules I'm responsible for|High|5|TBD|Waiting|
+|07|Teacher: View|As a teacher I want to be able to view my personal information, all ModuleRuns I teach and all Modules where I am the manager|High|10|15|Done|
 *--+---------------+-----------------------+------------------------+------------------------+----------+----------+
-|07|Manage modules & module runs|As administrative staff I want to be able to create, remove and edit the content of modules|High|6|TBD|Waiting
+|08|Teacher: Manage grades|As a teacher I want to be able to list all students of one moduleRun I teach, then add or edit the grades of students enrolled|Medium|5|5|Not finished|
 *--+---------------+-----------------------+------------------------+------------------------+----------+----------+
-|08|Manage students and teachers|As administrative staff I want to be able to assign students and teachers to module runs|High|4|TBD|Waiting
+|09|Teacher: Module Manager|As a Module Manager I want to be able to change the attributes of the module I am managing|Medium|5|-|Not finished|
 *--+---------------+-----------------------+------------------------+------------------------+----------+----------+
-|09|View schedule|As a teacher and as a student I want to be able to view a schedule detailing the time and place for the module runs I'm subscribed to/I'm teaching|Medium|4|TBD|Waiting
+|10|Student/Teacher: Edit personal information|As a student/teacher I want to be able to edit my personal information: for test cases we implement it only for the email-attribute|Low|10|10|Done|
+*--+---------------+-----------------------+------------------------+------------------------+----------+----------+
+|11|Student/Teacher: View schedule|As a teacher and as a student I want to be able to view a schedule detailing the time and place for the module runs I'm subscribed to/I'm teaching (WILL NOT BE IMPLEMENTED)|Medium|4|-|Done|
+*--+---------------+-----------------------+------------------------+------------------------+----------+----------+
+|12|Admin: View|Admins can view all model classes: Students, Teachers, Modules, ModuleRuns, Enrollments|High|6|25|Done
+*--+---------------+-----------------------+------------------------+------------------------+----------+----------+
+|13|Admin: Manage modules & module runs|As administrative staff I want to be able to create, remove and edit the content of modules and moduleRuns. They cannot change attributes the moduleManager is responsible for!|High|6|10|Done|
+*--+---------------+-----------------------+------------------------+------------------------+----------+----------+
+|14|Admin: Manage students and teachers|As administrative staff I want to be able to assign students and teachers to module runs and edit personal information. They cannot change personal information attributes Students and teachers can change on their own|High|4|6|Done|
+*--+---------------+-----------------------+------------------------+------------------------+----------+----------+
+|15|Login|As every role I want to be able to log in. All roles will have the same Login-Site|High|20|25|Done
+*--+---------------+-----------------------+------------------------+------------------------+----------+----------+
+|16|Style: Web|The Website looks simple, tidy, the functionality and navigation should be easy to understand|High|15|10|Done
+*--+---------------+-----------------------+------------------------+------------------------+----------+----------+
+|17|Advanced Style: Web|The Website looks very appealing and has recognition factor|Low|40|-|Done
+*--+---------------+-----------------------+------------------------+------------------------+----------+----------+
+|18|Style: Code|The Code is tidy, structured, easy to understand and follows a continuity. There are comments for guidance if needed|Mid|-|-|Done
 *--+---------------+-----------------------+------------------------+------------------------+----------+----------+

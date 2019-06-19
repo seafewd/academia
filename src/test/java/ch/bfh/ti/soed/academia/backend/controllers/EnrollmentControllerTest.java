@@ -8,12 +8,14 @@
 package ch.bfh.ti.soed.academia.backend.controllers;
 
 
-import ch.bfh.ti.soed.academia.backend.models.Enrollment;
-import jdk.nashorn.internal.ir.annotations.Ignore;
+import ch.bfh.ti.soed.academia.backend.models.*;
 import org.junit.jupiter.api.*;
 import javax.ejb.embeddable.EJBContainer;
 import javax.inject.Inject;
 import javax.naming.NamingException;
+
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -26,6 +28,9 @@ public class EnrollmentControllerTest {
 
     @Inject
     private EnrollmentsController enrollmentController;
+
+    @Inject
+    private StudentsController studentsController;
 
     /**
      * Start method, executed when this class is called
@@ -101,5 +106,17 @@ public class EnrollmentControllerTest {
     @Test
     public void testSave() {
         assertNotNull(enrollmentController.save(new Enrollment()));
+    }
+
+    @Test
+    public void testGetAllEnrollmentsByStudentTag() throws InvalidKeySpecException, NoSuchAlgorithmException {
+        Student student = new Student("John", "Snow", StudentStatus.Enrolled);
+        student.setTag("test");
+        student = this.studentsController.save(student);
+
+        Enrollment e1 = new Enrollment(new ModuleRun(), student, Evaluation.E);
+        this.enrollmentController.save(e1);
+        assertNotNull(enrollmentController.getAllEnrollmentsByStudentTag("test"));
+        Assertions.assertTrue(this.enrollmentController.getAllEnrollmentsByStudentTag("nono").isEmpty());
     }
 }

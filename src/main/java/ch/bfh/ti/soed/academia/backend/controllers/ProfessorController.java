@@ -67,4 +67,13 @@ public class ProfessorController {
         return this.professorService.save(professor);
     }
 
+    /**
+     * Search a Professor by tag
+     *
+     * @param tag of the Professor that we want to search
+     * @return the Professor
+     */
+    public Professor getProfessorByTag(String tag) {
+        return this.professorService.getProfessorByTag(tag);
+    }
 }

@@ -5,25 +5,29 @@
  *
  * Distributable under GPL license. See terms of license at gnu.org.
  */
-package ch.bfh.ti.soed.academia.ui.moduleruns;
+package ch.bfh.ti.soed.academia.ui.adminview.forms;
 
 import ch.bfh.ti.soed.academia.backend.models.Module;
 import ch.bfh.ti.soed.academia.backend.models.ModuleRun;
 import ch.bfh.ti.soed.academia.backend.models.Semester;
 import ch.bfh.ti.soed.academia.ui.FormInterface;
+import ch.bfh.ti.soed.academia.ui.adminview.AdminView;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
+
+import javax.ejb.EJBTransactionRolledbackException;
 
 /**
  * Formular for entering, edit (and save) or delete ModuleRuns
  */
 public class ModuleRunForm extends FormLayout implements FormInterface {
     private TextField id = new TextField("ModuleRun ID");
-    private ComboBox<Module> module = new ComboBox<>("Module ID");
+    private ComboBox<Module> moduleComboBox = new ComboBox<>("Module ID");
     private ComboBox<Semester> semester = new ComboBox<>("Semester");
 
     private Button save = new Button("Save");
@@ -31,7 +35,7 @@ public class ModuleRunForm extends FormLayout implements FormInterface {
     private Button delete = new Button("Delete");
 
     private ModuleRun moduleRun;
-    private ModuleRunsView view;
+    private AdminView view;
 
     private Binder<ModuleRun> binder = new Binder<>(ModuleRun.class);
 
@@ -40,35 +44,49 @@ public class ModuleRunForm extends FormLayout implements FormInterface {
      * sets the Formular of the ModuleRunView
      * @param view ModuleRunview
      */
-    public ModuleRunForm(ModuleRunsView view) {
+    public ModuleRunForm(AdminView view) {
         this.view = view;
 
         save.getElement().setAttribute("theme","primary");
-        save.addClickListener(e -> this.save());
+        save.addClickListener(e -> {
+            try {
+                this.save();
+            } catch (Exception ex) {
+                Notification.show("Something went wrong! Try again.");
+                ex.printStackTrace();
+            }
+        });
         cancel.addClickListener(e -> this.cancel());
-        delete.addClickListener(e -> this.delete());
+        delete.addClickListener(e -> {
+            try {
+                this.delete();
+            } catch (EJBTransactionRolledbackException sqle) {
+                Notification.show("Integrity constraint violation! Try deleting dependencies first.");
+                sqle.printStackTrace();
+            }
+        });
 
-        //get list of all module run IDs TODO: CHANGE TO MODULE IDs
-        this.module.setItems(view.getModulesController().getAllModules(""));
-        module.setItemLabelGenerator(Module::getIdAsString);
+        moduleComboBox.setItems(view.getModulesController().getAllModules(""));
+        moduleComboBox.setItemLabelGenerator(Module::getIdAsString);
         semester.setItems(Semester.values());
 
         id.addKeyPressListener(e -> this.formChanged());
-        module.addValueChangeListener(e -> this.formChanged());
+        moduleComboBox.addValueChangeListener(e -> this.formChanged());
+        semester.addValueChangeListener(e -> this.formChanged());
 
         /*
          * This configures the binder to use all the similarly named editor fields in
          * this form to bind their values with their counterpart in the Customer class.
          */
         binder.bind(id, m -> m.getId() + "", null);
-        //binder.bind(module, m -> m.getModule().getId() + "", null);
+        //binder.bind(moduleComboqBox, ModuleRun::getModule, null);
         binder.bindInstanceFields(this);
         binder.setReadOnly(true);
         binder.addValueChangeListener(e -> this.formChanged());
 
         HorizontalLayout buttons = new HorizontalLayout(save, cancel, delete);
 
-        add(module, semester, buttons);
+        add(moduleComboBox, semester, buttons);
         setModel(null);
     }
 
@@ -85,7 +103,7 @@ public class ModuleRunForm extends FormLayout implements FormInterface {
         cancel.setEnabled(false);
         delete.setEnabled(enabled);
         if (enabled) {
-            module.focus();
+            moduleComboBox.focus();
         }
     }
 
@@ -95,7 +113,7 @@ public class ModuleRunForm extends FormLayout implements FormInterface {
     @Override
     public void delete() {
         view.getModuleRunsController().deleteModuleRun(moduleRun);
-        view.updateList();
+        view.updateModuleRunsList();
         setModel(null);
     }
 
@@ -105,7 +123,7 @@ public class ModuleRunForm extends FormLayout implements FormInterface {
     @Override
     public void save() {
         view.getModuleRunsController().save(moduleRun);
-        view.updateList();
+        view.updateModuleRunsList();
         setModel(null);
     }
 

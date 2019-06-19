@@ -3,7 +3,7 @@
 		-------------
 		Eric Dubuis
 		-------------
-		September 29, 2017; updated November 13, 2017; updated September 2018; updated November 7, 2018
+		September 29, 2017; updated November 13, 2017; updated September 2018; updated November 7, 2018; Evaluation December 4, 2018
 
 
 Deliverable 3
@@ -129,40 +129,47 @@ example, in the Iteration Plan document, however.)
 *-------------------------------------------+---------------*-------------------*
 | Item										| Max. points	| Points received	|
 *-------------------------------------------+---------------*-------------------*
-| Product backlog, Sprint backlog,			|		5		|					|
+| Product backlog, Sprint backlog,			|		5		|		3			|
 | task list, finished items: \				|				|					|
 | Comments:\								|				|					|
-| 											|				|					|
+| - Product backlog: any progess? (-2) \	|				|					|
+| - Sprint backlog: good \					|				|					|
 *-------------------------------------------+---------------*-------------------*
-| Software design, design documentation 	| 		15		| 					|
+| Software design, design documentation 	| 		15		| 		9			|
 | (layering, sequence diagrams, A-I graph, ...) \ | 		| 					|
 | Comments: \								|				|					|
-|											|				|					|
+| - SSD "Enroll to ModuleRun": some dashed arrows are wrong \ |	|				|
+| - Layering: documentation missing (-2) \ 	|				|					|
+| - A-I graph: coordinate for "models" wrong (-2) \ |		|					|
+| - A-I graph: arrows missing (-2) \ 		|				|					|
 *-------------------------------------------+---------------*-------------------*
-| Production classes, and Javadoc\			| 		10		| 					|
-| Comments: None \							|				|					|
-| 											|				|					|
-*-------------------------------------------+---------------*-------------------*
-| JUnit test for production classes\		| 		10		| 					|
+| Production classes, and Javadoc\			| 		10		| 		6			|
 | Comments: \								|				|					|
-|											|				|					|
+| - JPA: Use named queries \				|				|					|
+| - JPA: Use named queries \				|				|					|
+| - Java: Superfluous import statement (-2)  \	|			|					|
+| - Java: Local variables not used (-2)  \	|				|					|
 *-------------------------------------------+---------------*-------------------*
-| JDepend, Checkstyle, PMD \				| 		10		| 					|
+| JUnit test for production classes\		| 		10		| 		10			|
 | Comments: \								|				|					|
-| 											|				|					|
+| - Test coverage: good						|				|					|
 *-------------------------------------------+---------------*-------------------*
-| Miscellaneous\							| 		-		| 					|
+| JDepend, Checkstyle, PMD \				| 		10		| 		10			|
+| Comments: \								|				|					|
+| - Good									|				|					|
+*-------------------------------------------+---------------*-------------------*
+| Miscellaneous\							| 		-		| 		-			|
 | Update of documents, if any :\			|				|					|
 | JPA: \									|				|					|
 | Vaadin: \									|				|					|
 | Varia: \									|				|					|
-| 											|				|					|
+| - Working application						|				|					|
 *-------------------------------------------+---------------*-------------------*
-| Total										| 		50		| 					|
+| Total										| 		50		| 		38			|
 *-------------------------------------------+---------------*-------------------*
 Distribution of points for this deliverable.
 
-		[Note:]	Total is [not] attributed to all members of the team.
+		[Note:]	Total is attributed to all members of the team.
 
 
 * Deadline

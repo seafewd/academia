@@ -9,7 +9,7 @@ variables:
   MAVEN_OPTS: "-Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN -Dorg.slf4j.simpleLogger.showDateTime=true -Djava.awt.headless=true"
 
 
-.brachrefs:
+.branchrefs:
   only:
     refs:
       - master
@@ -29,9 +29,10 @@ variables:
 stages:
   - build
   - deploy
+  - pages
 
 build:
-  extends: .brachrefs
+  extends: .branchrefs
   artifacts:
     paths:
       - target/staging
@@ -41,10 +42,10 @@ build:
   stage: build
   allow_failure: true
 
-pages:deploy:
+pages:
   dependencies:
     - build
-  extends: .brachrefs
+  extends: .branchrefs
   artifacts:
     paths:
       - public

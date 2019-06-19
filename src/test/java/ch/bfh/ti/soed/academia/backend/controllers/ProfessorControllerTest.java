@@ -12,6 +12,8 @@ import org.junit.jupiter.api.*;
 import javax.ejb.embeddable.EJBContainer;
 import javax.inject.Inject;
 import javax.naming.NamingException;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
@@ -94,5 +96,20 @@ public class ProfessorControllerTest {
     @Test
     public void testSave() {
         assertNotNull(professorController.save(new Professor()));
+    }
+
+    /**
+     *  Tests: getProfessorByTag method
+     *
+     */
+    @Test
+    public void testGetProfessorByTag() {
+        try{
+            Professor p = new Professor("Pietro", "Buongiorno");
+            Professor p1 = professorController.save(p);
+            assertEquals(p1.getTag(),this.professorController.getProfessorByTag(p1.getTag()).getTag());
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
     }
 }

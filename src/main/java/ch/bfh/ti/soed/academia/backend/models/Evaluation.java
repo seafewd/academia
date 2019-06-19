@@ -11,5 +11,5 @@ package ch.bfh.ti.soed.academia.backend.models;
  * Enum for assigning an evaluation of a ModuleRun
  */
 public enum Evaluation {
-    A, B, C, D, E, FX, F
+    A, B, C, D, E, FX, F, NYE
 }

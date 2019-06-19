@@ -8,9 +8,8 @@
 package ch.bfh.ti.soed.academia.backend.models;
 
 import ch.bfh.ti.soed.academia.backend.controllers.EnrollmentsController;
+import ch.bfh.ti.soed.academia.backend.controllers.ModuleRunsController;
 import ch.bfh.ti.soed.academia.backend.controllers.StudentsController;
-import ch.bfh.ti.soed.academia.backend.models.Student;
-import ch.bfh.ti.soed.academia.backend.services.StudentService;
 import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.*;
 import javax.ejb.embeddable.EJBContainer;
@@ -37,6 +36,9 @@ public class StudentTest {
 
     @Inject
     private EnrollmentsController enrollmentsController;
+
+    @Inject
+    private ModuleRunsController moduleRunsController;
 
     /**
      * Start method, executed when this class is called
@@ -106,6 +108,10 @@ public class StudentTest {
         //getSetRole
         student.setRole(Role.STUDENT);
         assertEquals(Role.STUDENT, student.getRole());
+
+        //get/set Mail
+        student.setEmail("test@gmail.com");
+        assertEquals("test@gmail.com", student.getEmail());
     }
 
     /**
@@ -198,5 +204,14 @@ public class StudentTest {
         student.setEnrollments(enrollmentSet);
         String test = student.getEnrollmentsName();
         assertTrue(test.equals("["+id1+","+id2+"]") || test.equals("["+id2+","+id1+"]"));
+    }
+
+    @Test
+    public void testGetDegreeProgramsAsList() throws InvalidKeySpecException, NoSuchAlgorithmException {
+        Student student = new Student("Pino", "Pippo", StudentStatus.Enrolled);
+        ModuleRun moduleRun = new ModuleRun(new Module("Math", ModuleType.PE, DegreeProgramme.ComputerScience,
+                "blabla", new Professor()), Semester.FS2019, new HashSet<>(), new HashSet<>());
+        this.moduleRunsController.subscribe(student,moduleRun);
+        assertNotNull(student.getDegreeProgramsAsSet());
     }
 }

@@ -5,16 +5,22 @@
  *
  * Distributable under GPL license. See terms of license at gnu.org.
  */
-package ch.bfh.ti.soed.academia.ui.modules;
+package ch.bfh.ti.soed.academia.ui.adminview.forms;
 
 import ch.bfh.ti.soed.academia.backend.models.*;
+import ch.bfh.ti.soed.academia.backend.models.Module;
 import ch.bfh.ti.soed.academia.ui.FormInterface;
+import ch.bfh.ti.soed.academia.ui.adminview.AdminView;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
+import com.vaadin.flow.data.binder.PropertyId;
+
+import javax.ejb.EJBTransactionRolledbackException;
 
 /**
  * Formular for entering, edit (and save) or delete Modules
@@ -23,9 +29,9 @@ import com.vaadin.flow.data.binder.Binder;
 public class ModuleForm extends FormLayout implements FormInterface {
 
     private TextField name = new TextField("Module name");
-    //TextField lastName = new TextField("Last name");
     private ComboBox<ModuleType> moduleType = new ComboBox<>("ModuleType");
     private ComboBox<DegreeProgramme> courseOfStudy = new ComboBox<>("Degree Programme");
+    @PropertyId("lastName")
     private ComboBox<Professor> moduleManager = new ComboBox<>("Module Manager");
     private TextField description = new TextField("Description");
 
@@ -35,7 +41,7 @@ public class ModuleForm extends FormLayout implements FormInterface {
 
     private Module module;
 
-    private ModuleView view;
+    private AdminView view;
 
     private Binder<Module> binder = new Binder<>(Module.class);
 
@@ -44,7 +50,7 @@ public class ModuleForm extends FormLayout implements FormInterface {
      * sets the Formular of the ModuleView
      * @param view ModuleView
      */
-    public ModuleForm(ModuleView view) {
+    public ModuleForm(AdminView view) {
         // Should use CDI; see https://bit.ly/2wwmZd2, end of chap. 6.
         this.view = view;
 
@@ -55,10 +61,16 @@ public class ModuleForm extends FormLayout implements FormInterface {
         save.getElement().setAttribute("theme", "primary");
         save.addClickListener(e -> this.save());
         cancel.addClickListener(e -> this.cancel());
-        delete.addClickListener(e -> this.delete());
+        delete.addClickListener(e -> {
+            try {
+                this.delete();
+            } catch (EJBTransactionRolledbackException sqle) {
+                Notification.show("Integrity constraint violation! Try deleting dependencies first.");
+                sqle.printStackTrace();
+            }
+        });
 
         name.addKeyPressListener(e -> this.formChanged());
-        //lastName.addKeyPressListener(e -> this.formChanged());
 
         /*
          * This configures the binder to use all the similarly named editor fields in
@@ -96,7 +108,7 @@ public class ModuleForm extends FormLayout implements FormInterface {
     @Override
     public void delete() {
         view.getModulesController().deleteModule(module);
-        view.updateList();
+        view.updateModulesList();
         setModel(null);
     }
 
@@ -106,7 +118,7 @@ public class ModuleForm extends FormLayout implements FormInterface {
     @Override
     public void save() {
         view.getModulesController().save(module);
-        view.updateList();
+        view.updateModulesList();
         setModel(null);
     }
 

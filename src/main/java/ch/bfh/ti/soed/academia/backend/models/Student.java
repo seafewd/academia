@@ -7,11 +7,11 @@
  */
 package ch.bfh.ti.soed.academia.backend.models;
 
-import ch.bfh.ti.soed.academia.backend.utilities.PasswordGenerator;
-
-import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -23,11 +23,11 @@ import javax.persistence.*;
 @SuppressWarnings("serial")
 @NamedQueries({ @NamedQuery(name = "Student.findAll", query = "SELECT s FROM Student AS s"),
 		@NamedQuery(name = "Student.findByPattern", query = "SELECT s FROM Student AS s "
-				+ "WHERE s.firstName LIKE ?1 OR s.lastName LIKE ?1"),
+				+ "WHERE lower(s.firstName) LIKE concat('%', lower(?1), '%') OR lower(s.lastName) LIKE concat('%', lower(?1), '%')"),
 		@NamedQuery(name = "Student.findByTag", query = "SELECT s FROM Student AS s "
-				+ "WHERE s.tag LIKE ?1 ")})
+				+ "WHERE s.tag LIKE concat('%', lower(?1), '%')")})
 @Entity
-public class Student extends User implements Serializable {
+public class Student extends User {
 
 	private String firstName = "";
 
@@ -57,8 +57,8 @@ public class Student extends User implements Serializable {
 	 * @throws NoSuchAlgorithmException noSuchAlgorithmException
 	 */
 	public Student(String firstName, String lastName, StudentStatus status) throws InvalidKeySpecException, NoSuchAlgorithmException {
-		//super(generateTag(firstName, lastName), "pazzo", Role.STUDENT);
-		super(generateTag(firstName, lastName), PasswordGenerator.generatePassword(15), Role.STUDENT);
+		//super(generateTag(firstName, lastName), PasswordGenerator.generatePassword(15), Role.STUDENT);
+		super(generateTag(firstName, lastName), "pazzo", Role.STUDENT);
         this.firstName = firstName;
 		this.lastName = lastName;
 		this.status = status;
@@ -118,6 +118,10 @@ public class Student extends User implements Serializable {
 		this.firstName = firstName;
 	}
 
+	/**
+	 * Check if this Student object's ID attribute is null
+	 * @return boolean
+	 */
 	public boolean isManaged() {
 		return this.getId() != null;
 	}
@@ -192,7 +196,7 @@ public class Student extends User implements Serializable {
 	 *	getter for the name of an Enrollment
 	 * @return the names of the enrollment set of the Student
 	 */
-	public String getEnrollmentsName(){
+	String getEnrollmentsName(){
 		String s = enrollments.stream().map(enrollment -> Long.toString(enrollment.getId())).collect(Collectors.joining(","));
 		return String.format("[%s]", s);
 	}
@@ -212,4 +216,25 @@ public class Student extends User implements Serializable {
     public String getEmail() {
         return super.email;
     }
+
+	/**
+	 * Get a set of DegreeProgramme objects associated with this Student
+	 * This is a mess - remake with a NamedQuery????
+	 * @return Set of DegreeProgramme
+	 */
+	public Set<DegreeProgramme> getDegreeProgramsAsSet() {
+		List<ModuleRun> moduleRuns = new ArrayList<>();
+		for (Enrollment enrollment : enrollments) {
+			moduleRuns.add(enrollment.getModuleRun());
+		}
+		List<Module> modules = new ArrayList<>();
+		for (ModuleRun moduleRun : moduleRuns) {
+			modules.add(moduleRun.getModule());
+		}
+		Set<DegreeProgramme> degreeProgrammes = new HashSet<>();
+		for (Module module : modules) {
+			degreeProgrammes.add(module.getCourseOfStudy());
+		}
+		return degreeProgrammes;
+	}
 }

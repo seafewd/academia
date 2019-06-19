@@ -8,21 +8,21 @@
 package ch.bfh.ti.soed.academia.backend.models;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.List;
 
 @NamedQueries({ @NamedQuery(name = "Module.findAll", query = "SELECT m FROM Module AS m"),
         //@NamedQuery(name = "Module.findByPattern", query = "SELECT m FROM Module AS m WHERE m.id LIKE ?1"),
         @NamedQuery(name = "Module.findByPattern", query = "SELECT m FROM Module AS m " +
                 "WHERE lower(m.name) LIKE CONCAT('%', lower(?1), '%')"),
-
+        @NamedQuery(name = "Module.findByUserTag",
+                query = "SELECT m FROM Module AS m WHERE m.professor.tag LIKE ?1")
 })
 
 /**
  * The Module entity.
  */
 @Entity
-public class Module implements Serializable {
+public class Module {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,6 +33,9 @@ public class Module implements Serializable {
     private DegreeProgramme courseOfStudy;
 
     private String description;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Professor professor;
 
     private String name = "12345";
 
@@ -98,6 +101,24 @@ public class Module implements Serializable {
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * Get the value of professor
+     *
+     * @return the manager of the module
+     */
+    public Professor getProfessor() {
+        return professor;
+    }
+
+    /**
+     * Set the value of professor
+     *
+     * @param professor new value of professor
+     */
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
     }
 
     /**

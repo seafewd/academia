@@ -7,19 +7,22 @@
  */
 package ch.bfh.ti.soed.academia.backend.models;
 
-import ch.bfh.ti.soed.academia.backend.utilities.PasswordHash;
+import ch.bfh.ti.soed.academia.backend.utilities.password.PasswordHash;
 
 import javax.persistence.*;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
-import java.util.Random;
 
 /**
  * Abstract User class used for authentication/authorization system
  * Extended by Student, Professor
  */
+@NamedQueries({
+        @NamedQuery(name = "User.findByPattern", query = "SELECT u FROM User AS u "
+                + "WHERE u.tag LIKE ?1")})
+@Entity
 @MappedSuperclass
-public abstract class User {
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,7 +53,7 @@ public abstract class User {
      * @throws NoSuchAlgorithmException noSuchALgorithmException
      */
     public User(String tag, String password, Role role) throws InvalidKeySpecException, NoSuchAlgorithmException {
-        this.tag = tag + (new Random().nextInt(100) + 100);
+        this.tag = tag;
         this.password = PasswordHash.createHash(password);
         this.role = role;
         setEmail(generateEmail());
@@ -88,9 +91,11 @@ public abstract class User {
         this.tag = tag;
     }
 
+
     /**
-     * Set password
-     * @param password (String)
+     * @param password the password
+     * @throws InvalidKeySpecException exception
+     * @throws NoSuchAlgorithmException exception
      */
     public void setPassword(String password) throws InvalidKeySpecException, NoSuchAlgorithmException {
         this.password = PasswordHash.createHash(password);
@@ -147,6 +152,10 @@ public abstract class User {
         this.email = email;
     }
 
+    /**
+     * Generate an e-mail for this User object based on its tag
+     * @return e-mail as String
+     */
     private String generateEmail(){
         return this.getTag() + "@students.academia.ng.com";
     }

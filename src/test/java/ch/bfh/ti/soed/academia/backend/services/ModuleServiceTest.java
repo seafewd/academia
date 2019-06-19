@@ -8,6 +8,7 @@
 package ch.bfh.ti.soed.academia.backend.services;
 
 import ch.bfh.ti.soed.academia.backend.models.*;
+import ch.bfh.ti.soed.academia.backend.models.Module;
 import org.junit.jupiter.api.*;
 import javax.ejb.embeddable.EJBContainer;
 import javax.inject.Inject;
@@ -112,7 +113,6 @@ public class ModuleServiceTest {
     public void testDelete(){
         Module m = new Module();
         Module m1 = service.save(m);
-        long id = m1.getId();
 
         int count = service.findAll().size();
 

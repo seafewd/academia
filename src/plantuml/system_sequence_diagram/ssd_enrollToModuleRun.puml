@@ -11,10 +11,10 @@ Student -> Controller: Student::getEnrollments()
 Controller -> Repository: Student::getEnrollments()
 Repository --> Controller: Set of Enrollments for this Student object
 Controller --> Student: Set of Enrollments for this Student object
-Student --> Controller: Create new Enrollment
+Student -> Controller: Create new Enrollment
 Controller --> Student: Empty Enrollment object
-Student --> Controller: Enter enrollment data (ModuleRun ID, this.studentID{implicit}, Semester)
-Controller --> Repository: save(enrollment)
+Student -> Controller: Enter enrollment data (ModuleRun ID, this.studentID{implicit}, Semester)
+Controller -> Repository: save(enrollment)
 Repository --> Controller:
 Controller --> Student: updateList()
 

@@ -1,6 +1,7 @@
 package ch.bfh.ti.soed.academia.persistence;
 
 import ch.bfh.ti.soed.academia.backend.models.*;
+import ch.bfh.ti.soed.academia.backend.models.Module;
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import javax.ejb.embeddable.EJBContainer;

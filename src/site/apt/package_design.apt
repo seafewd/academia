@@ -6,13 +6,32 @@
 
 Package Design
 
+* Package Structure
+
+	We divided the backend part in 6 packages:
+
+    [[1]]Models, that make the base of our program. Here we implemented all objects that will be visible to the user,
+so Students, Professors, Enrollments, Semesters etc.
+
+    [[2]]Services, that make the functionality of the program. Here we implemented all methods that need non-trivial logic,
+so save, filter, delete methods etc. (and no getters, setters etc.)
+
+    [[3]]Controllers, that make the gateway for the UI. The controller doesn't implement logic, but it makes it more clearly
+which service is capable for which action
+
+    [[4]]The UI, that makes the logic and structure for that what the user will see
+
+    [[5]]The Persistence, that is responsible for the data management
+
+    [[6]]Utilities, where complicated functions are outsourced, so everything about the password generation
+
 * Package Diagram
 
 	The package diagram shows the dependencies between the packages in a project.
 Here, it consists of the following elements: package, class, and interface.
 
 ~~Remove comment "~~" to include figure here:
-~~[images/package_diagram.svg] Package Diagram
+[images/PackageDesign.png] Package Diagram
 
 ~~Our package diagram consists of .., because we built it using the Model View Presenter pattern (MVP). ...
 

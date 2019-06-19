@@ -10,14 +10,19 @@ package ch.bfh.ti.soed.academia.backend.models;
 import ch.bfh.ti.soed.academia.backend.controllers.EnrollmentsController;
 import ch.bfh.ti.soed.academia.backend.controllers.ModuleRunsController;
 import ch.bfh.ti.soed.academia.backend.controllers.ModulesController;
+import ch.bfh.ti.soed.academia.backend.controllers.ProfessorController;
+
 import org.junit.jupiter.api.*;
 import javax.ejb.embeddable.EJBContainer;
 import javax.inject.Inject;
 import javax.naming.NamingException;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.HashSet;
 import java.util.Set;
 import static ch.bfh.ti.soed.academia.backend.models.Semester.FS2018;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
@@ -35,6 +40,9 @@ public class ModuleRunTest {
 
     @Inject
     private ModuleRunsController moduleRunsController;
+
+    @Inject
+    private ProfessorController professorController;
 
     /**
      * Start method, executed when this class is called
@@ -69,6 +77,37 @@ public class ModuleRunTest {
     @AfterEach
     public void reset() throws NamingException {
         container.getContext().unbind("inject");
+    }
+
+    /**
+     * Tests the counting of enrolled students in a module run. Duplicates not allowed
+     * @throws NoSuchAlgorithmException
+     * @throws InvalidKeySpecException
+     */
+    @Test
+    void testGetEnrollmentCount() throws NoSuchAlgorithmException, InvalidKeySpecException {
+        Professor professor1 = new Professor("Hardy", "Harr");
+        Module module1 = new Module("BTI7081", ModuleType.PE, DegreeProgramme.ComputerScience, "Software Engineering & Design", professor1);
+        ModuleRun moduleRun = new ModuleRun(module1, Semester.FS2018);
+        Student student1 = new Student("Test", "Tester", StudentStatus.Enrolled);
+        Student student2 = new Student("Test", "Tester", StudentStatus.Enrolled);
+        Student student3 = new Student("Test", "Tester", StudentStatus.Enrolled);
+        Student student4 = new Student("Test", "Tester", StudentStatus.Enrolled);
+        Student student5 = new Student("Test", "Tester", StudentStatus.Enrolled);
+        Enrollment enrollment1 = new Enrollment(moduleRun, student1, Evaluation.A);
+        Enrollment enrollment2 = new Enrollment(moduleRun, student2, Evaluation.B);
+        Enrollment enrollment3 = new Enrollment(moduleRun, student3, Evaluation.C);
+        Enrollment enrollment4 = new Enrollment(moduleRun, student4, Evaluation.F);
+        Enrollment enrollment5 = new Enrollment(moduleRun, student5, Evaluation.B);
+        Set<Enrollment> enrollments = new HashSet<>();
+        enrollments.add(enrollment1);
+        enrollments.add(enrollment2);
+        enrollments.add(enrollment3);
+        enrollments.add(enrollment4);
+        enrollments.add(enrollment5);
+        enrollments.add(enrollment5);
+        moduleRun.setEnrollments(enrollments);
+        assertEquals(5, moduleRun.getEnrollmentCount());
     }
 
     /**
@@ -143,10 +182,50 @@ public class ModuleRunTest {
      */
     @Test
     public void ModuleRun() {
-        Enrollment e = new Enrollment();
         Set<Enrollment> eSet = new HashSet<Enrollment>();
         Set<Professor> pSet = new HashSet<Professor>();
 
         ModuleRun moduleRun = new ModuleRun(new Module(), Semester.FS2018, eSet, pSet);
+        assertNotNull(moduleRun);
+    }
+
+
+    /**
+     * @throws InvalidKeySpecException Exception
+     * @throws NoSuchAlgorithmException Exception
+     * Tests the GetProfessorLastNames and getProfessorIDs methods
+     */
+    @Test
+    public void testGetProfessorsLastNamesAndId() throws InvalidKeySpecException, NoSuchAlgorithmException {
+
+        Professor p2 = new Professor("Hans", "Meier");
+        p2 = this.professorController.save(p2);
+        Module m1 = new Module("BTI2020", ModuleType.PE, DegreeProgramme.ComputerScience, "Analysis", p2);
+        m1 = this.modulesController.save(m1);
+
+        Professor p3 = new Professor("Martin", "Suter");
+        p3 = this.professorController.save(p3);
+        Professor p4 = new Professor("Sepp", "Hofer");
+        p4 = professorController.save(p4);
+
+        Set<Professor> professorSet = new HashSet<>();
+        professorSet.add(p3);
+        professorSet.add(p4);
+
+        ModuleRun mr1 = new ModuleRun(m1, Semester.FS2018);
+        mr1.setProfessors(professorSet);
+        mr1 = this.moduleRunsController.save(mr1);
+
+        String as1 = p4.getLastName() + ", " + p3.getLastName();
+        String as2 = p3.getLastName() + ", " + p4.getLastName();
+
+        assertTrue(as1.equals(mr1.getProfessorLastNames()) || as2.equals(mr1.getProfessorLastNames()));
+
+        String as3 = p4.getId().toString() + ", " + p3.getId().toString();
+        String as4 = p3.getId().toString() + ", " + p4.getId().toString();
+
+        assertTrue(as3.equals(mr1.getProfessorIDs()) || as4.equals(mr1.getProfessorIDs()));
+
+
     }
 }

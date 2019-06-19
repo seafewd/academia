@@ -8,6 +8,7 @@
 package ch.bfh.ti.soed.academia.backend.services;
 
 import ch.bfh.ti.soed.academia.backend.models.*;
+import ch.bfh.ti.soed.academia.backend.models.Module;
 import org.junit.jupiter.api.*;
 import javax.ejb.embeddable.EJBContainer;
 import javax.inject.Inject;
@@ -24,6 +25,9 @@ public class ModuleRunServiceTest {
 
     @Inject
     private ModuleRunService service;
+
+    @Inject
+    private ModuleService moduleService;
 
     /**
      * Start method, executed when this class is called
@@ -103,6 +107,12 @@ public class ModuleRunServiceTest {
         ModuleRun moduleRun1 = new ModuleRun(new Module(), Semester.FS2018); //add the filter key in this line by defining the attribute that can be filtered
         service.save(moduleRun1);
         assertEquals(count1 + 1, service.findAll().size());
+
+        Module m1 = new Module("BBBB1", ModuleType.PE, DegreeProgramme.ComputerScience, "test", new Professor());
+        m1 = moduleService.save(m1);
+        ModuleRun mr1 = new ModuleRun(m1, Semester.HS2018);
+        service.save(mr1);
+        assertEquals(1, service.findAll("BBB").size());
     }
 
     /**

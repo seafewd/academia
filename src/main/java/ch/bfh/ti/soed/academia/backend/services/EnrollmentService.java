@@ -94,4 +94,15 @@ public class EnrollmentService {
         Enrollment ns = em.merge(enrollment);
         return ns;
     }
+
+    /**
+     * Get a List of Enrollments associated with this Student's tag
+     * @param tag as String
+     * @return List of Enrollment objects
+     */
+    public List<Enrollment> getAllEnrollmentsByStudentTag(String tag) {
+        TypedQuery<? extends Enrollment> q = this.em.createNamedQuery("Enrollment.findByUserTag", Enrollment.class);
+        q.setParameter(1, tag);
+        return (List<Enrollment>) q.getResultList();
+    }
 }

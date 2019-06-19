@@ -5,7 +5,7 @@
  *
  * Distributable under GPL license. See terms of license at gnu.org.
  */
-package ch.bfh.ti.soed.academia.backend.utilities;
+package ch.bfh.ti.soed.academia.backend.utilities.password;
 
 import java.security.SecureRandom;
 import javax.crypto.spec.PBEKeySpec;

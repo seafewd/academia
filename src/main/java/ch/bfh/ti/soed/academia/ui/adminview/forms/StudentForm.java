@@ -5,11 +5,12 @@
  *
  * Distributable under GPL license. See terms of license at gnu.org.
  */
-package ch.bfh.ti.soed.academia.ui.students;
+package ch.bfh.ti.soed.academia.ui.adminview.forms;
 
 import ch.bfh.ti.soed.academia.backend.models.Role;
-import ch.bfh.ti.soed.academia.backend.utilities.PasswordGenerator;
+import ch.bfh.ti.soed.academia.backend.utilities.password.PasswordGenerator;
 import ch.bfh.ti.soed.academia.ui.FormInterface;
+import ch.bfh.ti.soed.academia.ui.adminview.AdminView;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.formlayout.FormLayout;
@@ -36,7 +37,7 @@ public class StudentForm extends FormLayout implements FormInterface {
 
 	private Student student;
 
-	private StudentsView view;
+	private AdminView view;
 
 	private Binder<Student> binder = new Binder<>(Student.class);
 
@@ -47,7 +48,7 @@ public class StudentForm extends FormLayout implements FormInterface {
 	 * sets the Formular of the StudentView
 	 * @param view StudentView
 	 */
-	public StudentForm(StudentsView view) {
+	public StudentForm(AdminView view) {
 		this.view = view;
 		status.setItems(StudentStatus.values());
 		save.getElement().setAttribute("theme", "primary");
@@ -96,7 +97,7 @@ public class StudentForm extends FormLayout implements FormInterface {
 	@Override
 	public void delete() {
 		view.getStudentsController().deleteStudent(student);
-		view.updateList();
+		view.updateStudentsList();
 		setModel(null, false);
 	}
 
@@ -115,7 +116,7 @@ public class StudentForm extends FormLayout implements FormInterface {
 		student.setTag(Student.generateTag(student.getFirstName(), student.getLastName()));
 		student.setRole(Role.STUDENT);
 		view.getStudentsController().save(student);
-		view.updateList();
+		view.updateStudentsList();
 		setModel(null, false);
 	}
 

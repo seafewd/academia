@@ -7,6 +7,7 @@
  */
 package ch.bfh.ti.soed.academia.backend.services;
 
+import ch.bfh.ti.soed.academia.backend.models.Enrollment;
 import ch.bfh.ti.soed.academia.backend.models.ModuleRun;
 
 import javax.ejb.Stateless;
@@ -76,6 +77,21 @@ public class ModuleRunService {
      * @return a managed copy of the given ModuleRun object having an id
      */
     public ModuleRun save(ModuleRun moduleRun) {
+        // assert entry != null ...
+        ModuleRun ns = em.merge(moduleRun);
+        return ns;
+    }
+
+    /**
+     * Persists or updates a moduleRun in the persistence store. Also assigns an
+     * identifier for new ModuleRun instances.
+     *
+     * @param moduleRun a new moduleRun or a moduleRun being updated
+     * @param enrollment a new enrollment to update moduleRun
+     * @return a managed copy of the given ModuleRun object having an id
+     */
+    public ModuleRun save(ModuleRun moduleRun, Enrollment enrollment) {
+        moduleRun.addEnrollment(enrollment);
         // assert entry != null ...
         ModuleRun ns = em.merge(moduleRun);
         return ns;

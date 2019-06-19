@@ -59,4 +59,15 @@ public class ModulesController {
     public Module save(Module module){
         return this.moduleService.save(module);
     }
+
+    /**
+     * Controller method for getting all modules managed by tag
+     * @param tag   Tag to search with
+     * @return  List of managed modules
+     */
+    public List<Module> getAllManagedModulesByProfessorTag(String tag) {
+        List<Module> modules = this.moduleService.findAll();
+        modules.removeIf(module -> !module.getModuleManagerTag().equals(tag));
+        return modules;
+    }
 }

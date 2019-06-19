@@ -7,11 +7,16 @@
  */
 package ch.bfh.ti.soed.academia.backend.models;
 
+import ch.bfh.ti.soed.academia.backend.controllers.ProfessorController;
+import ch.bfh.ti.soed.academia.backend.controllers.StudentsController;
 import org.junit.jupiter.api.*;
 
 import javax.ejb.embeddable.EJBContainer;
 import javax.inject.Inject;
 import javax.naming.NamingException;
+
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -23,7 +28,14 @@ public class UserTest {
     private static EJBContainer container;
 
     @Inject
-    private User user;
+    User user;
+
+    @Inject
+    ProfessorController professorsController;
+
+    @Inject
+    StudentsController studentsController;
+
     /**
      * Start method, executed when this class is called
      */
@@ -59,18 +71,38 @@ public class UserTest {
         container.getContext().unbind("inject");
     }
 
+
     /**
-     *  Tests: all getter and setter methods
+     * Tests: all getter and setter methods
+     * @throws InvalidKeySpecException Exception
+     * @throws NoSuchAlgorithmException Exception
      */
     @Test
-    public void testGetSet() {
-        User u = new Student();
+    public void testGetSet() throws InvalidKeySpecException, NoSuchAlgorithmException {
+        Student student = new Student("Test", "Testy", StudentStatus.Enrolled);
 
-        u.setVersion((long)123);
-        assertEquals((long)123, (long)u.getVersion());
+        student.setVersion(123L);
+        assertEquals(123L, (long)student.getVersion());
+
+        student.setTag("halloFreund");
+        assertEquals("halloFreund", student.getTag());
+    }
 
 
-        u.setTag("halloFreund");
-        assertEquals("halloFreund", u.getTag());
+    /**
+     * Tests getRole method
+     * @throws InvalidKeySpecException Exception
+     * @throws NoSuchAlgorithmException Exception
+     */
+    @Test
+    public void testGetRole() throws InvalidKeySpecException, NoSuchAlgorithmException {
+        Professor professor = new Professor("Testy", "McTestFace");
+        Student student = new Student("Student", "McStudentFace", StudentStatus.Enrolled);
+        Role role1 = professor.getRole();
+        Role role2 = student.getRole();
+
+        assertEquals(role1, Role.PROFESSOR);
+        assertEquals(role2, Role.STUDENT);
+
     }
 }

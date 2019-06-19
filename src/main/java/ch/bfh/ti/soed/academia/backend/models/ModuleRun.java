@@ -8,20 +8,21 @@
 package ch.bfh.ti.soed.academia.backend.models;
 
 import javax.persistence.*;
-import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @NamedQueries({ @NamedQuery(name = "ModuleRun.findAll", query = "SELECT m FROM ModuleRun AS m"),
         @NamedQuery(name = "ModuleRun.findByPattern", query = "SELECT m FROM ModuleRun AS m " +
                 "WHERE lower(m.name) LIKE CONCAT('%', lower(?1), '%')"),
-
-})
+        @NamedQuery(name = "ModuleRun.findByUserTag",
+                query = "SELECT m FROM ModuleRun AS m WHERE m.professors LIKE ?1")
+        })
 /**
  * The ModuleRun entity.
  */
 @Entity
-public class ModuleRun implements Serializable {
+public class ModuleRun {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -69,6 +70,7 @@ public class ModuleRun implements Serializable {
     public ModuleRun(Module module, Semester semester) {
         this.module = module;
         this.semester = semester;
+        this.professors = new HashSet<>();
         setName();
     }
 
@@ -175,12 +177,28 @@ public class ModuleRun implements Serializable {
     }
 
     /**
+     * Get number of students enrolled to this ModuleRun object
+     * @return Number of students   int
+     */
+    public int getEnrollmentCount() {
+        return getEnrollments().size();
+    }
+
+    /**
      * Get a String of IDs of all Professor objects associated with this ModuleRun
      * @return String of IDs (xx, yy, zz, ...)
      */
     public String getProfessorIDs(){
         String s = professors.stream().map(professor -> Long.toString(professor.getId())).collect(Collectors.joining(", "));
         return String.format("%s", s);
+    }
+
+    /**
+     * Get a list of professor last names
+     * @return String of professor last names
+     */
+    public String getProfessorLastNames(){
+        return professors.stream().map(Professor::getLastName).collect(Collectors.joining(", "));
     }
 
     /**
@@ -200,7 +218,26 @@ public class ModuleRun implements Serializable {
         this.name = generateName();
     }
 
+    /**
+     * Generates a name based off the name of the Module and the Semester
+     * @return Concatenated String
+     */
     public String generateName(){
         return module.getName() + "-" + semester.toString();
+    }
+
+
+    /**
+     * @param enrollment Add an Enrollment to the enrollments
+     */
+    public void addEnrollment(Enrollment enrollment) {
+        this.enrollments.add(enrollment);
+    }
+
+    /**
+     * @param professor Add a Professor to the professors
+     */
+    public void addProfessor(Professor professor) {
+        this.professors.add(professor);
     }
 }

@@ -42,22 +42,40 @@ public class UserService {
      * @return user
      */
     public User findByTag(String tag){
-
+        TypedQuery<? extends  User> q = this.em.createNamedQuery("User.findByPattern", User.class);
         TypedQuery<? extends  User> q1 = this.em.createNamedQuery("Student.findByTag", Student.class);
         TypedQuery<? extends  User> q2 = this.em.createNamedQuery("Professor.findByTag", Professor.class);
+        q.setParameter(1, tag);
         q1.setParameter(1, tag);
         q2.setParameter(1, tag);
         User user;
         try {
-            user = q1.getSingleResult();
+            user = q.getSingleResult();
             return user;
         }catch (NoResultException ne) {
             try {
-                user = q2.getSingleResult();
+                user = q1.getSingleResult();
                 return user;
             } catch (NoResultException ne1) {
-                return null;
+                try {
+                    user = q2.getSingleResult();
+                    return user;
+                } catch (NoResultException ne2) {
+                    return null;
+                }
             }
         }
+    }
+
+    /**
+     * Persists or updates a student in the persistence store. Also assigns an
+     * identifier for new user instances.
+     *
+     * @param user a new user or a user being updated
+     * @return a managed copy of the given user object having an id
+     */
+    public User save(User user) {
+        User ns = em.merge(user);
+        return ns;
     }
 }

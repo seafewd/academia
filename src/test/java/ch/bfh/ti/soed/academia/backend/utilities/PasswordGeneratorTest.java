@@ -7,9 +7,12 @@
  */
 package ch.bfh.ti.soed.academia.backend.utilities;
 
+import ch.bfh.ti.soed.academia.backend.utilities.password.PasswordGenerator;
 import org.junit.jupiter.api.*;
 import javax.ejb.embeddable.EJBContainer;
 import javax.naming.NamingException;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * TestingClass - Tests all Methods in class PasswordGenerator
@@ -59,5 +62,6 @@ public class PasswordGeneratorTest {
     @Test
     public void passwordGeneratorTest() {
         PasswordGenerator pwGen = new PasswordGenerator();
+        assertNotNull(pwGen);
     }
 }

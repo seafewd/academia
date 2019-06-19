@@ -5,11 +5,12 @@
  *
  * Distributable under GPL license. See terms of license at gnu.org.
  */
-package ch.bfh.ti.soed.academia.ui.professors;
+package ch.bfh.ti.soed.academia.ui.adminview.forms;
 
 import ch.bfh.ti.soed.academia.backend.models.Role;
-import ch.bfh.ti.soed.academia.backend.utilities.PasswordGenerator;
+import ch.bfh.ti.soed.academia.backend.utilities.password.PasswordGenerator;
 import ch.bfh.ti.soed.academia.ui.FormInterface;
+import ch.bfh.ti.soed.academia.ui.adminview.AdminView;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -25,13 +26,14 @@ public class ProfessorForm extends FormLayout implements FormInterface {
 
     private TextField firstName = new TextField("First name");
     private TextField lastName = new TextField("Last name");
+    private TextField email = new TextField("E-mail");
     private Button save = new Button("Save");
     private Button cancel = new Button("Cancel");
     private Button delete = new Button("Delete");
 
     private Professor professor;
 
-    private ProfessorsView view;
+    private AdminView view;
 
     private Binder<Professor> binder = new Binder<>(Professor.class);
 
@@ -42,7 +44,7 @@ public class ProfessorForm extends FormLayout implements FormInterface {
      * sets the Formular of the ProfessorView
      * @param view ProfesorView
      */
-    public ProfessorForm(ProfessorsView view) {
+    public ProfessorForm(AdminView view) {
         this.view = view;
 
         save.getElement().setAttribute("theme", "primary");
@@ -52,6 +54,7 @@ public class ProfessorForm extends FormLayout implements FormInterface {
 
         firstName.addKeyPressListener(e -> this.formChanged());
         lastName.addKeyPressListener(e -> this.formChanged());
+        email.addKeyPressListener(e -> this.formChanged());
 
         /*
          * This configures the binder to use all the similarly named editor fields in
@@ -62,7 +65,7 @@ public class ProfessorForm extends FormLayout implements FormInterface {
         binder.addValueChangeListener(e -> this.formChanged());
 
         HorizontalLayout buttons = new HorizontalLayout(save, cancel, delete);
-        add(firstName, lastName, buttons);
+        add(firstName, lastName, email, buttons);
         setModel(null, false);
     }
 
@@ -91,7 +94,7 @@ public class ProfessorForm extends FormLayout implements FormInterface {
     @Override
     public void delete() {
         view.getProfessorController().deleteProfessor(professor);
-        view.updateList();
+        view.updateProfessorsList();
         setModel(null, false);
     }
 
@@ -110,7 +113,7 @@ public class ProfessorForm extends FormLayout implements FormInterface {
         professor.setTag(Professor.generateTag(professor.getFirstName(), professor.getLastName()));
         professor.setRole(Role.PROFESSOR);
         view.getProfessorController().save(professor);
-        view.updateList();
+        view.updateProfessorsList();
         setModel(null, false);
     }
 

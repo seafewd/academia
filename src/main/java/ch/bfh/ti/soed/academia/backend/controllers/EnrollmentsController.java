@@ -73,4 +73,13 @@ public class EnrollmentsController {
     public Enrollment save(Enrollment enrollment){
         return this.enrollmentService.save(enrollment);
     }
+
+    /**
+     * Get List of Enrollment objects associated with Student's tag attr.
+     * @param tag User tag as String
+     * @return String
+     */
+    public List<Enrollment> getAllEnrollmentsByStudentTag(String tag) {
+        return this.enrollmentService.getAllEnrollmentsByStudentTag(tag);
+    }
 }

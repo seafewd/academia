@@ -40,11 +40,7 @@
 		</module>
 		<!-- Checks for Star imports. -->
 		<!-- See http://checkstyle.sourceforge.net/config_imports.html -->
-		<module name="AvoidStarImport">
-			<property name="excludes" value="java.io,java.net,java.lang.Math,javax.persistence,ch.bfh.ti.soed.academia.backend.models,ch.bfh.ti.soed.academia.backend.services"/>
-			<property name="allowClassImports" value="false" />
-			<property name="allowStaticMemberImports" value="false" />
-		</module>
+
 		<!-- Checks for non-visibility of members. -->
 		<!-- See http://checkstyle.sourceforge.net/config_design.html -->
 		<module name="VisibilityModifier">

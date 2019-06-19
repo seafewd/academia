@@ -11,5 +11,5 @@ package ch.bfh.ti.soed.academia.backend.models;
  * Role Enum to decide access level of user
  */
 public enum Role {
-    STUDENT, PROFESSOR;
+    STUDENT, PROFESSOR, ADMIN;
 }

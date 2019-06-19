@@ -3,6 +3,10 @@
 This is the project root directory of the Student Administration System 'Academia'.
 This is a [Maven](http://www.maven.org) project.
 
+------
+Run with JDK 8
+------
+
 
 To compile the binaries, type:
 

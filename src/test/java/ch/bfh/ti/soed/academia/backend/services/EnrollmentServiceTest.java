@@ -8,15 +8,12 @@
 package ch.bfh.ti.soed.academia.backend.services;
 
 import ch.bfh.ti.soed.academia.backend.models.*;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.junit.jupiter.api.*;
 import javax.ejb.embeddable.EJBContainer;
 import javax.inject.Inject;
 import javax.naming.NamingException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
-import java.util.HashSet;
-import java.util.Set;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -99,7 +96,7 @@ public class EnrollmentServiceTest {
     public void testFindAllFiltered() throws InvalidKeySpecException, NoSuchAlgorithmException {
         String pattern = ""; //change if tag in enrollment is changed
         int count = service.findAll(pattern).size();
-        Enrollment e = new Enrollment(new ModuleRun(), new Student("Zebra", "Test", StudentStatus.Enrolled), Evaluation.E);
+        Enrollment e = new Enrollment(new ModuleRun(), new Student("Testi", "Test", StudentStatus.Enrolled), Evaluation.E);
         service.save(e);
         assertEquals(count + 4, service.findAll().size()); //all new saved Enrollments with Zebra (so in this case 1) should be found
 
@@ -114,9 +111,8 @@ public class EnrollmentServiceTest {
      */
     @Test
     public void testFindByID() throws InvalidKeySpecException, NoSuchAlgorithmException {
-        int count = service.findById((long)113).size();
-        Enrollment en = new Enrollment(new ModuleRun(), new Student("Zebra", "Test", null), Evaluation.E);
-        Enrollment en1 = new Enrollment(new ModuleRun(), new Student("Zebra", "Test", null), Evaluation.E);
+        Enrollment en = new Enrollment(new ModuleRun(), new Student("Tebra", "Maier", StudentStatus.Enrolled), Evaluation.E);
+        Enrollment en1 = new Enrollment(new ModuleRun(), new Student("Zebro", "Testo", StudentStatus.Enrolled), Evaluation.E);
 
         Enrollment e = service.save(en);
         Enrollment e1 = service.save(en1);

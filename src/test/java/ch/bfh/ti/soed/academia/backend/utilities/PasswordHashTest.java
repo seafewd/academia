@@ -7,10 +7,13 @@
  */
 package ch.bfh.ti.soed.academia.backend.utilities;
 
+import ch.bfh.ti.soed.academia.backend.utilities.password.PasswordHash;
 import org.junit.jupiter.api.*;
 
 import javax.ejb.embeddable.EJBContainer;
 import javax.naming.NamingException;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * TestingClass - Tests all Methods in class PasswordHash
@@ -60,5 +63,6 @@ public class PasswordHashTest {
     @Test
     public void validatePasswordTest() {
         PasswordHash pwHash = new PasswordHash();
+        assertNotNull(pwHash);
     }
 }

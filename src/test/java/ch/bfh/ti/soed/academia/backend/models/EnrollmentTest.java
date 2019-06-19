@@ -14,7 +14,6 @@ import javax.naming.NamingException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 
-import static ch.bfh.ti.soed.academia.backend.models.DegreeProgramme.ComputerScience;
 import java.util.HashSet;
 import java.util.Set;
 import static ch.bfh.ti.soed.academia.backend.models.Evaluation.C;
@@ -73,7 +72,6 @@ public class EnrollmentTest {
         Enrollment enrollment = new Enrollment();
 
         //Test for method getModuleRun / setModuleRun:
-        Module module = new Module();
         ModuleRun moduleRun = new ModuleRun();
         enrollment.setModuleRun(moduleRun);
         assertEquals(moduleRun,enrollment.getModuleRun());
@@ -101,5 +99,12 @@ public class EnrollmentTest {
         moduleRun.setEnrollments(sE);
         enrollment.setModuleRun(moduleRun);
         assertEquals(sE, enrollment.getEnrollments());
+
+        //Test getModuleRunName
+        Module m1 = new Module("BBBB", ModuleType.PE, DegreeProgramme.ComputerScience, "Physics", new Professor());
+        ModuleRun mr1 = new ModuleRun(m1, Semester.HS2018);
+        Student s1 = new Student("Fritz", "Fischer", StudentStatus.Enrolled);
+        Enrollment e1 = new Enrollment(mr1, s1, Evaluation.NYE);
+        assertEquals("BBBB-HS2018", e1.getModuleRunName());
     }
 }

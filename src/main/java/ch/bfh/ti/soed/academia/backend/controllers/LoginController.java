@@ -9,7 +9,7 @@ package ch.bfh.ti.soed.academia.backend.controllers;
 
 import ch.bfh.ti.soed.academia.backend.models.User;
 import ch.bfh.ti.soed.academia.backend.services.UserService;
-import ch.bfh.ti.soed.academia.backend.utilities.PasswordHash;
+import ch.bfh.ti.soed.academia.backend.utilities.password.PasswordHash;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import java.security.NoSuchAlgorithmException;

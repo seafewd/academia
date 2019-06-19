@@ -111,6 +111,9 @@ public class ModuleTest {
 
         //getManagerTag
         assertNotNull(module.getModuleManagerTag());
+
+        module.setProfessor(professor);
+        assertEquals(professor, module.getProfessor());
     }
 
     /**

@@ -13,6 +13,7 @@ import javax.naming.NamingException;
 import java.util.HashSet;
 import java.util.Set;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * TestingClass - Tests all Methods in class Professor
@@ -97,5 +98,6 @@ public class ProfessorTest {
     public void Professor() {
         Set<ModuleRun> sMR = new HashSet<>();
         Professor p = new Professor("Tom","Tennemann", sMR);
+        assertNotNull(p);
     }
 }
