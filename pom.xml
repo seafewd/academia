@@ -18,7 +18,7 @@
 		<failOnMissingWebXml>false</failOnMissingWebXml>
 
 		<!-- Dependencies -->
-		<vaadin.version>11.0.0</vaadin.version>
+		<vaadin.version>19.0.5</vaadin.version>
 		<tomee.version>7.0.5</tomee.version>
 		<derby.version>10.13.1.1</derby.version>
 		<checkstyle.version>8.12</checkstyle.version>
